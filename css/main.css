@@ -809,6 +809,11 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -819,5 +824,9 @@ video {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:rounded-lg {
+    border-radius: 0.5rem;
   }
 }
