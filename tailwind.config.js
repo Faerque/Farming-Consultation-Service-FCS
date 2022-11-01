@@ -12,6 +12,7 @@ module.exports = {
       colors : {
         brightBlue: '#5EA2B7',
         brightGray:  '#D9D9D9',
+        darkGrayishBlue: 'hsl(227, 12%, 61%)',
       }
     },
   },

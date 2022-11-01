@@ -603,6 +603,10 @@ video {
   flex-direction: column;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -672,6 +676,10 @@ video {
   padding-top: 0.5rem;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -737,6 +745,11 @@ video {
 .hover\:bg-green-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+}
+
+.hover\:text-darkGrayishBlue:hover {
+  --tw-text-opacity: 1;
+  color: hsl(227 12% 61% / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus {
