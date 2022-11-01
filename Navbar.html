@@ -4,7 +4,49 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css">
+    <script src=".js/script.js"></script>
     <title>Navbar</title>
   </head>
-  <body></body>
+  <body class="bg-brightGray">
+    <nav class="relative container mx-auto my-4 p-6 rounded-lg bg-brightBlue">
+      <!-- Flex Container -->
+      <div class="flex items-center justify-between">
+        <!-- Logo-->
+        <div class="pt-2">
+          <a href="LandingPage.html">
+            <img src="assets/icons/logo.svg" alt=""
+            width="150"
+            height="50">
+            </a>
+        </div> 
+        <!--Menu Items--> 
+        <div class="hidden md:flex space-x-6">
+          <a href="./Service.html" class="hover:text-darkGrayishBlue">Services</a>
+          <a href="./MarketPlace.html" class="hover:text-darkGrayishBlue">MarketPlace</a>
+          <a href="#" class="hover:text-darkGrayishBlue">About Us</a>
+          <a href="#" class="hover:text-darkGrayishBlue">Community</a>
+        </div>
+        <!-- Button -->
+        <a href="#" class="hidden md:block p-3 px-6 pt-2 text-white bg-green-500 rounded-full baseline hover:bg-green-300">
+          Get Started
+        </a>
+        <!--Hamburger Icon-->
+        <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+          <span class="hamburger-top"></span>
+          <span class="hamburger-middle"></span>
+          <span class="hamburger-bottom"></span>
+        </button>
+      </div>
+      <!--Mobile Menu-->
+      <div class="md:hidden">
+          <div id="menu" class="absolute flex-col items-center self-end hidden py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm-self-center left-6 right-6 drop-shadow-md">
+              <a href="./Service.html">Services</a>
+              <a href="./MarketPlace.html">Marketplace</a>
+              <a href="#">About us</a>
+              <a href="#">Community</a>
+          </div>
+      </div>
+    </nav>
+  </body>
 </html>
