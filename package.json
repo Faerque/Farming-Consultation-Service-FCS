@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Faerque/Farming-Consultation-Service-FCS#readme",
   "devDependencies": {
     "tailwindcss": "^3.2.1"
+  },
+  "dependencies": {
+    "daisyui": "^2.38.0"
   }
 }
