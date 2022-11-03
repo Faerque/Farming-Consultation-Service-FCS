@@ -7,46 +7,41 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Navbar</title>
   </head>
-  <body class="bg-brightGray">
-    <nav class="relative mx-4 my-4 p-6 rounded-lg bg-black">
-      <!-- Flex Container -->
-      <div class="flex items-center justify-between">
-        <!-- Logo-->
-        <div class="pt-2">
-          <a href="./LandingPage.html">
-            <img src="assets/icons/logo-white.svg" alt=""
-            width="150"
-            height="50">
-            </a>
-        </div> 
-        <!--Menu Items--> 
-        <div class="container hidden md:flex space-x-6 text-white justify-end ">
-          <a href="./Service.html" class="hover:text-darkGrayishBlue">Services</a>
-          <a href="./MarketPlace.html" class="hover:text-darkGrayishBlue">MarketPlace</a>
-          <a href="#" class="hover:text-darkGrayishBlue">About Us</a>
-          <a href="#" class="hover:text-darkGrayishBlue">Community</a>
+  <body>
+    <nav class="relative w-full flex flex-wrap items-center justify-between navbar navbar-expand-lg">
+    <div class="navbar bg-black rounded-lg text-white">
+      <div class="navbar-start bg-black text-white">
+        <div class="dropdown bg-black text-white">
+          <label tabindex="0" class="btn btn-ghost lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+          </label>
+          <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-black text-white rounded-box w-52">
+            <li><a href="./Service.html" class="hover:text-gray-300">Services</a></li>
+            <li tabindex="0">
+              <a href="./MarketPlace.html" class="hover:text-gray-300 justify-between">
+                MarketPlace
+              </a>
+            </li>
+            <li><a class="hover:text-gray-300">Technology</a></li>
+          </ul>
         </div>
-        <!-- Button -->
-        <a href="#" class="hidden md:block p-3 px-6 pt-2 text-white bg-green-500 rounded-full baseline hover:bg-green-300">
-          Get Started
-        </a>
-        <!--Hamburger Icon-->
-        <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
-          <span class="hamburger-top"></span>
-          <span class="hamburger-middle"></span>
-          <span class="hamburger-bottom"></span>
-        </button>
+        <a href="./LandingPage.html" class="btn btn-ghost hover:text-gray-300 normal-case text-xl">Farming Consultation Service</a>
       </div>
-      <!--Mobile Menu-->
-      <div class="md:hidden">
-          <div id="menu" class="absolute flex-col items-center self-end hidden py-8 mt-10 space-y-6 font-bold bg-black text-white sm:w-auto sm-self-center left-6 right-6 drop-shadow-md">
-              <a href="./Service.html">Services</a>
-              <a href="./MarketPlace.html">Marketplace</a>
-              <a href="#">About us</a>
-              <a href="#">Community</a>
-          </div>
+      <div class="navbar-center bg-black text-white hidden lg:flex">
+        <ul class="menu menu-horizontal p-0 bg-black text-white">
+          <li><a href="./Service.html" class="hover:text-gray-300">Services</a></li>
+          <li tabindex="0">
+            <a href="./MarketPlace.html" class="hover:text-gray-300">
+              MarketPlace
+            </a>
+          </li>
+          <li><a class="hover:text-gray-300">Technology</a></li>
+        </ul>
       </div>
+      <div class="navbar-end">
+        <a href="#" class="hidden md:block p-3 px-6 pt-2 text-white bg-green-500 rounded-full baseline hover:bg-green-300">Get started</a>
+      </div>
+    </div>
     </nav>
-    <script src="js/script.js"></script>
   </body>
 </html>
