@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
     // getting user info from local storage
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    const [isSignedIn, setIsSignedIn] = useState(userInfo ? userInfo.isSignedIn : false);
+
+
 
     // logout function
     const logoutHandler = () => {
         localStorage.removeItem('userInfo');
         window.location.reload();
+        navigate('/');
+
     }
+
 
     console.log(userInfo);
     return (
@@ -20,7 +26,7 @@ const Navbar = () => {
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
-                    <li><a>Item 1</a></li>
+                    <li><Link to="/marketPlace">Market Place</Link></li>
                     <li tabindex="0">
                         <a>
                             Parent
@@ -36,10 +42,10 @@ const Navbar = () => {
                 <div class="dropdown dropdown-end">
                     <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                         <div class="w-10 rounded-full">
-                            {isSignedIn === true ? <img alt='userImage' src={userInfo.picture} /> : null}
+                            {userInfo ? <img alt='userImage' src={userInfo.picture} /> : null}
                         </div>
                     </label>
-                    {isSignedIn === true ? <div>
+                    {userInfo ? <div>
                         <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                             <li>
                                 <Link to='dashboard' className="justify-between">
@@ -47,7 +53,7 @@ const Navbar = () => {
                                 </Link>
                             </li>
                             <li>
-                                {userInfo.isAdmin === true ? <Link to='F7d32fab841334cdb7b6' className="justify-between">
+                                {userInfo.isAdmin ? <Link to='F7d32fab841334cdb7b6' className="justify-between">
                                     Got to Admin Dashboard
                                 </Link> : null}
                             </li>

@@ -9,7 +9,6 @@ import Loading from './Loading';
 
 const UserSignup = () => {
 
-
     const [isCapsLockIsOn, setCapsLockIsOn] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -51,6 +50,7 @@ const UserSignup = () => {
                     setSignUpSuccess(false);
                     localStorage.setItem('userInfo', JSON.stringify(data));
                     navigate('/');
+                    window.location.reload();
                 }, 2000);
             } catch (error) {
                 setError(error.response.data);

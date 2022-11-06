@@ -5,9 +5,7 @@ import UserAvatar from '../assets/UserAvatar.svg'
 import FooterSm from './Footer/FooterSm';
 import axios from 'axios';
 import Loading from './Loading';
-
-
-
+import { UserContext } from '../App';
 
 const UserLogin = () => {
 
@@ -20,7 +18,7 @@ const UserLogin = () => {
     const [showError, setShowError] = useState(false);
     const [isCapsLockIsOn, setCapsLockIsOn] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
-
+    const [loggedInUser, setLoggedInUser] = useState(UserContext);
     // function Caps lock is on or not
     const handleCapsLock = (e) => {
         if (e.getModifierState("CapsLock")) {
@@ -51,13 +49,13 @@ const UserLogin = () => {
             }, config);
             const signInUser = {
                 isSignedIn: true,
-                name: data.name,
-                email: data.email,
-                picture: data.picture,
-                isAdmin: data.isAdmin,
+                ...data
             }
+            const userVerified = data.isVerified;
             // here we set it into local storage in object format because we can't set it in string format in local storage
             localStorage.setItem('userInfo', JSON.stringify(signInUser));
+            localStorage.setItem('userVerified', JSON.stringify(userVerified));
+            setLoggedInUser(signInUser);
             setLoading(false);
             // giving a delay of 1 second to show the loading screen
             setLoginSuccess(true);
@@ -79,7 +77,7 @@ const UserLogin = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img className="mx-auto h-12 w-auto" src={UserAvatar} alt="Your Company" />
+                        <img className="mx-auto h-12 w-auto" src={UserAvatar} alt="user login" />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">Sign in to your account</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             Or <br />
@@ -91,7 +89,7 @@ const UserLogin = () => {
                         <div className="-space-y-px rounded-md shadow-sm">
                             <div>
                                 <label for="email-address" className="sr-only">Email address</label>
-                                <input id="email-address" name="email" type="email" autocomplete="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"
+                                <input id="email-address" name="email" type="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />

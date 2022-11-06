@@ -22,15 +22,19 @@ const Services = () => {
             }
         }
         fetchData();
-    }, [serviceData]);
+    }, []);
 
     return (
-        <div className='' >
-            <div className='justify-self-center' >
-                <div className='overflow-hidden bg-white shadow sm:rounded-lg'>
-                    {serviceData.map((service) => <Service key={service.id} service={service} />)}
+        <div className=''>
+
+            <div className=''>
+                <div className=''>
+                    <div className='flex m-32 grid grid-rows-3 grid-flow-col gap-2'>
+                        {serviceData.map((service) => <Service key={service.id} service={service} />)}
+                    </div>
                 </div>
             </div>
+
         </div>
     );
 };

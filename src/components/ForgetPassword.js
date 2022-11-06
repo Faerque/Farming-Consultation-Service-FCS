@@ -40,7 +40,7 @@ const ForgetPassword = ({ setShowModal }) => {
                     </div>
                 </div>
             </div>
-        </section >
+        </section>
     );
 };
 

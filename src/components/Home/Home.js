@@ -3,14 +3,15 @@ import FooterMain from '../Footer/FooterMain';
 
 import Feature from './Feature';
 import Header from './Header';
-import Stext from './Stext';
+import Testimonials from './Testimonials';
+
 const Home = () => {
     return (
         <>
             <div className='grid h-screen place-items-center'>
                 <Header />
                 <Feature />
-                <Stext />
+                <Testimonials />
                 <FooterMain />
             </div>
         </>
