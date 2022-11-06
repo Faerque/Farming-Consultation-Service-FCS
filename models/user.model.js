@@ -23,10 +23,30 @@ const userSchema = mongoose.Schema({
         required: true,
         default: false,
     },
+    isVerified: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
     picture: {
         type: String,
         required: true,
-        default: "https://pixabay.com/images/id-973460/",
+        default: " ",
+    },
+    NID: {
+        type: String,
+        required: true,
+        default: "Nothing",
+    },
+    phone: {
+        type: String,
+        required: true,
+        default: "Nothing",
+    },
+    address: {
+        type: String,
+        default: " ",
+
     },
 },
     {

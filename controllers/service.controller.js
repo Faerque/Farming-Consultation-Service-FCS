@@ -1,36 +1,101 @@
 
-// JSON data to send to the server
-const serviceData = [
-    {
-        "id": 1,
-        "name": "Soil Testing",
-        "description": "Soil testing is the analysis of soil samples to determine the physical, chemical, and biological properties of the soil. Soil testing is used to determine the suitability of soil for agricultural purposes, to determine the soil's ability to support the construction of buildings and roads, and to determine the soil's suitability for waste disposal.",
-        "available": true,
-        "result_time": "1 day",
+const Service = require('../models/service.model');
 
-    },
-    {
-        "id": 2,
-        "name": "Crops Growth",
-        "description": "Crops are plants cultivated for food, fiber, biofuel, medicinal plants, or other uses. Crops can be annuals, biennials, or perennials. Annual crops are harvested once a year, biennials are harvested twice, and perennials are harvested for many years. Crops can be classified as either monocots or dicots. Monocots have one cotyledon, or seed leaf, and dicots have two.",
-        "available": true,
-        "result_time": "1 day",
-    },
-    {
-        "id": 3,
-        "name": "Plant Disease",
-        "description": "Plant disease is any abnormal condition that impairs the normal functioning of a plant. Plant diseases can be caused by pathogens such as bacteria, fungi, viruses, phytoplasmas, viroids, nematodes, and parasitic plants. They can also be caused by environmental conditions such as drought, extreme temperatures, or exposure to toxic chemicals.",
-        "available": true,
-        "result_time": "same day",
-    }
-]
-
-// service controller
+// Services
 const services = (req, res) => {
-    // here we send data to user as json in proper format
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(serviceData));
-
+    Service.find()
+        .then(services => {
+            res.status(200).json(services);
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: err.message || "Some error occurred while retrieving services."
+            });
+        });
 }
 
-module.exports = services;
+// Add Service
+const addService = (req, res) => {
+    // Validate request
+    if (!req.body) {
+        res.status(400).json({
+            message: "Content can not be empty!"
+        });
+    }
+
+    // Create a Service
+    const service = new Service({
+        name: req.body.name,
+        description: req.body.description,
+        available: req.body.available,
+
+    });
+
+    // Save Service in the database
+    Service.create(service)
+        .then(data => {
+            res.status(201).json(data);
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: err.message || "Some error occurred while creating the Service."
+            });
+        });
+}
+
+// update service
+const updateService = (req, res) => {
+    Service.updateOne({ _id: req.params.id }, req.body)
+        .then(data => {
+            if (!data) {
+                res.status(404).json({
+                    message: `Cannot update Service with id=${id}. Maybe Service was not found!`
+                });
+            } else res.status(200).json({ message: "Service was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Error updating Service with id=" + id
+            });
+        });
+}
+
+// delete service
+const deleteService = (req, res) => {
+    Service.deleteOne({ _id: req.params.id })
+        .then(data => {
+            if (!data) {
+                res.status(404).json({
+                    message: `Cannot delete Service with id=${id}. Maybe Service was not found!`
+                });
+            } else {
+                res.status(200).json({
+                    message: "Service was deleted successfully!"
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Could not delete Service with id=" + id
+            });
+        });
+}
+
+// Select a service
+const selectService = (req, res) => {
+    const id = req.params.id;
+    // console.log(id);
+    Service.findById(id)
+        .then(data => {
+            if (!data)
+                res.status(404).json({ message: "Not found Service with id " + id });
+            else res.status(200).json(data);
+        })
+        .catch(err => {
+            res.status(500).json({ message: "Error retrieving Service with id=" + id });
+        });
+}
+
+
+
+module.exports = { services, addService, updateService, deleteService, selectService };
