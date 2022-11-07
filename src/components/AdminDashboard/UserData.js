@@ -20,7 +20,7 @@ const UserData = () => {
             })
             .catch(error => console.log(error));
     }, []);
-    console.log(users);
+    console.log(users.email);
     return (
         <main>
             <div class="flex">

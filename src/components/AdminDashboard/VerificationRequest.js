@@ -1,14 +1,17 @@
+// import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SpinnerLoading from '../SpinnerLoading';
 import AdminSidePanel from './AdminSidePanel';
-import CheckingForVerifiedUser from './CheckingForVerifiedUser';
+// import CheckingForVerifiedUser from './CheckingForVerifiedUser';
 
 const VerificationRequest = () => {
     const [loading, setLoading] = useState(true);
     const [verificationRequest, setVerificationRequest] = useState([]);
+    const [allUserData, setAllUserData] = useState([]);
+
     const navigate = useNavigate();
     useEffect(() => {
         fetch('/api/userVerificationProcess/')
@@ -25,6 +28,36 @@ const VerificationRequest = () => {
         console.log(id);
         navigate({ pathname: '/checkingForVerifiedUser', search: `?id=${id}` });
     };
+
+
+
+    useEffect(() => {
+        fetch('api/users/allUsers')
+            .then(res => res.json())
+            .then(data => {
+
+                setAllUserData(data);
+                setLoading(false);
+            })
+            .catch(error => console.log(error));
+    }, []);
+    // need to show the data who is not verified both in database user and userVerificationProcess
+    // const filterUser = allUserData.filter(data => {
+    //     const user = verificationRequest.find(user => user.email === data.email && data.isVerified === false);
+    //     if (user) {
+    //         console.log(user.phone);
+    //         return true;
+    //     }
+    //     return false;
+    // });
+    const filterUser = verificationRequest.filter(data => {
+        const user = allUserData.find(user => user.email === data.email && user.isVerified === false);
+        if (user) {
+            // console.log(user.phone);
+            return true;
+        }
+        return false;
+    })
 
     return (
         <section>
@@ -56,15 +89,15 @@ const VerificationRequest = () => {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {verificationRequest.map((request, index) => <tr key={request._id}>
-                                                            <td>{index + 1}</td>
-                                                            <td>{request._id}</td>
-                                                            <td>{request.name}</td>
-
-                                                            <td>{request.email}</td>
-                                                            <td>{request.phone}</td>
-                                                            <td><button onClick={() => handleNext(request._id)}>Verify now</button></td>
-                                                        </tr>)}
+                                                        {filterUser
+                                                            .map((request, index) => <tr key={request._id}>
+                                                                <td>{index + 1}</td>
+                                                                <td>{request._id}</td>
+                                                                <td>{request.name}</td>
+                                                                <td>{request.email}</td>
+                                                                <td>{request.phone}</td>
+                                                                <td><button onClick={() => handleNext(request._id)}>Verify now</button></td>
+                                                            </tr>)}
                                                     </tbody>
                                                 </table>
                                             </div>
