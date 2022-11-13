@@ -10,6 +10,8 @@ import SpinnerLoading from '../SpinnerLoading';
 const UserData = () => {
     const [users, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [selects, setSelects] = useState(" ");
+
     // fetching users data from server
     useEffect(() => {
         setLoading(true);
@@ -21,6 +23,30 @@ const UserData = () => {
             .catch(error => console.log(error));
     }, []);
     console.log(users.email);
+
+    const sortedUser = (user) => {
+        if (selects === "Admin") {
+            return user.isAdmin === true
+        } if (selects === "Verified") {
+            return user.isVerified === true
+        }
+        if (selects === "Not Verified") {
+            return user.isVerified === false
+        }
+
+        else {
+            return user
+        }
+    }
+
+    // formating date which got from server
+    const formatDate = (date) => {
+        const newDate = new Date(date);
+
+        return newDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+
     return (
         <main>
             <div class="flex">
@@ -40,6 +66,16 @@ const UserData = () => {
                                                 <h3 class="text-lg font-medium leading-6 text-gray-900">All the user available listed here</h3>
                                                 <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details of users</p>
                                             </div>
+                                            <select value={selects} onChange={e => setSelects(e.target.value)}
+                                                className="select my-2 mb-1 select-ghost w-48 max-w-xs">
+                                                <option disabled selected>Sort by:</option>
+                                                <option>All</option>
+                                                <option>Admin</option>
+                                                <option>Verified</option>
+
+                                                <option>Not Verified</option>
+                                            </select>
+
                                             <div class="border-t border-gray-200">
                                                 <div class="overflow-x-auto">
                                                     <table class="table w-full">
@@ -52,20 +88,24 @@ const UserData = () => {
                                                                 <th>Email</th>
                                                                 <th>Verified</th>
                                                                 <th>Role</th>
-                                                                <th>Address</th>
+                                                                <th>Account created at</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {users.map((user, index) => <tr key={user._id}>
-                                                                <td>{index + 1}</td>
-                                                                <td>{user._id}</td>
-                                                                <td>{user.name}</td>
-                                                                <td className='text-rose-600' >No phone Number Provided</td>
-                                                                <td>{user.email}</td>
-                                                                <td className='text-rose-600'>Not Verified</td>
-                                                                {user.isAdmin === true ? <td className='text-green-500'>Admin</td> : <td>Not Admin</td>}
-                                                                <td>Address</td>
-                                                            </tr>)}
+                                                            {users
+                                                                .filter(user => sortedUser(user))
+                                                                .map((user, index) =>
+                                                                    <tr key={user._id}>
+                                                                        <td>{index + 1}</td>
+                                                                        <td>{user._id}</td>
+                                                                        <td>{user.name}</td>
+                                                                        {user.phone === " " || user.phone === 'Nothing' ? <td>Not Provided</td> : <td>{"0" + user.phone}</td>}
+                                                                        <td>{user.email}</td>
+                                                                        {user.isVerified ? <td className='text-green-600'>Verified</td> : <td className='text-red-600'>Not Verified</td>}
+                                                                        {user.isAdmin ? <td className='text-green-500'>Admin</td> : <td>Not Admin</td>}
+
+                                                                        <td>{user.created_at}</td>
+                                                                    </tr>)}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -82,7 +122,7 @@ const UserData = () => {
             <div className='mt-20'>
                 <FooterSm />
             </div>
-        </main>
+        </main >
     );
 };
 

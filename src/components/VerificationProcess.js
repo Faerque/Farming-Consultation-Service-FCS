@@ -12,11 +12,15 @@ const VerificationProcess = () => {
     const [email, setEmail] = useState(userInfo.email)
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
+    const [age, setAge] = useState("");
+    const [gender, setGender] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [picture, setPictureURL] = useState(null);
+    const [pictureUploadSuccess, setPictureUploadSuccess] = useState(false);
+    const [nidUploadSuccess, setNidUploadSuccess] = useState(false);
     const [NID, setNIDURL] = useState(null);
     console.log(picture);
     console.log(NID);
@@ -25,6 +29,7 @@ const VerificationProcess = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
         try {
             const config = {
                 headers: {
@@ -34,7 +39,7 @@ const VerificationProcess = () => {
             setLoading(true);
             setButtonDisabled(true);
             const { data } = await axios.post('/api/userVerificationProcess/addVerification',
-                { name, email, address, phone, picture, NID },
+                { name, email, address, phone, gender, age, picture, NID },
                 config);
             setTimeout(() => {
                 setLoading(false);
@@ -46,7 +51,9 @@ const VerificationProcess = () => {
             setError(error.response.data);
             console.log(error.response.data);
             setLoading(false);
+            setButtonDisabled(false);
         }
+
     }
 
     // upload image to cloudinary
@@ -63,6 +70,7 @@ const VerificationProcess = () => {
         });
         const file = await res.json();
         setPictureURL(file.secure_url);
+        setPictureUploadSuccess(true);
 
     }
 
@@ -80,6 +88,7 @@ const VerificationProcess = () => {
         });
         const file = await res.json();
         setNIDURL(file.secure_url);
+        setNidUploadSuccess(true);
 
     }
 
@@ -182,7 +191,7 @@ const VerificationProcess = () => {
                         </div>
                         <div class="grow-0 shrink-0 basis-auto mb-12 md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
                             <form onSubmit={submitHandler}>
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-2">
                                     <label class="font-bold text-gray-700" htmlFor="name">Enter Full Name</label>
                                     <input type="text" class="form-control block
               w-full
@@ -203,7 +212,7 @@ const VerificationProcess = () => {
                                         onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
-                                <div class="form-group mb-6">
+                                <div class="form-group mb-2">
                                     <label class="font-bold text-gray-700" htmlFor="email">Enter Email</label>
                                     <input disabled type="email " class="disabled form-control block
               w-full
@@ -223,9 +232,9 @@ const VerificationProcess = () => {
                                         placeholder={userInfo.email}
                                     />
                                 </div>
-                                <div class="form-group mb-6">
-                                    <label class="font-bold text-gray-700" htmlFor="address">Enter your phone number</label>
-                                    <input type="address" class="form-control block
+                                <div class="form-group mb-2">
+                                    <label class="font-bold text-gray-700" htmlFor="number">Enter your phone number</label>
+                                    <input type="number" class="form-control block
               w-full
               px-3
               py-1.5
@@ -245,7 +254,51 @@ const VerificationProcess = () => {
                                     />
                                 </div>
 
-                                <div class="form-group mb-6">
+
+
+                                <div class="form-group mb-2">
+                                    <label class="font-bold text-gray-700" htmlFor="text">Enter Gender</label>
+                                    <input type="text" class="form-control block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
+                                        placeholder="Enter Gender"
+                                        value={gender}
+                                        onChange={(e) => setGender(e.target.value)}
+                                    />
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label class="font-bold text-gray-700" htmlFor="age">Enter Age</label>
+                                    <input type="number" class="form-control block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              font-normal
+              text-gray-700
+              bg-white bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
+                                        placeholder="Enter Age"
+                                        value={age}
+                                        onChange={(e) => setAge(e.target.value)}
+                                    />
+                                </div>
+                                <div class="form-group mb-2">
                                     <label class="font-bold text-gray-700" htmlFor="address">Enter Full Address</label>
                                     <input type="address" class="form-control block
               w-full
@@ -271,26 +324,26 @@ const VerificationProcess = () => {
                                     <label class="mb-0 block text-base
               font-normal
               text-gray-700">
-                                        Upload File
+                                        Upload your Passport Size Photo
                                     </label>
 
                                     <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-sm border  cursor-pointer" aria-describedby="file_input_help" id="file_input" type="file"
                                         onChange={uploadImage}
                                     />
-                                    <p class="mt-1 text-sm  text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                                    {pictureUploadSuccess ? <p className="text-green-500">Image Uploaded Successfully</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG </p>}
 
                                 </div>
                                 <div class="mb-2">
                                     <label class="mb-0 block text-base
               font-normal
               text-gray-700">
-                                        Upload File
+                                        Upload Your National ID cards
                                     </label>
 
                                     <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-sm border  cursor-pointer" aria-describedby="file_input_help" id="file_input" type="file"
                                         onChange={uploadNID}
                                     />
-                                    <p class="mt-1 text-sm  text-gray-700" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                                    {nidUploadSuccess ? <p class="mt-1  text-green-500" id="file_input_help">Nid upload successfully</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG</p>}
 
                                 </div>
                                 {loading && <Loading />}
@@ -303,7 +356,7 @@ const VerificationProcess = () => {
                                 {error && <div class="alert alert-error shadow-lg">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                        <span>Error Occurred, try again</span>
+                                        <span> Error occurred</span>
                                     </div>
                                 </div>}
                                 <div className='place-content-center' >

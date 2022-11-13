@@ -11,6 +11,7 @@ const TakeConsultation = () => {
     // console.log(id);
     const [loading, setLoading] = useState(true);
     const [consultation, setConsultation] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,12 +28,25 @@ const TakeConsultation = () => {
     }, [id]);
     console.log(consultation);
 
+    const uploadImage = async (e) => {
+        console.log(e.target.files[0]);
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'farming');
+        data.append('cloud_name', 'dybft9kel');
+        const res = await fetch('https://api.cloudinary.com/v1_1/dybft9kel/image/upload', {
+            method: 'POST',
+            body: data
+        });
+        const file = await res.json();
+        setImageUrl(file.secure_url);
+
+    }
+
     return (
         <div className=''>
-            {/* <h1>This is take Consultation part</h1>
-            all data: <h2>{consultation._id}</h2>
-            <h2>{consultation.name}</h2>
-            <h2>{consultation.description}</h2> */}
+
             <div class="container my-14 px-6 mx-auto">
                 {loading ? <div className='p-20'>
 
@@ -134,66 +148,18 @@ const TakeConsultation = () => {
                             </div>
                             <div class="grow-0 shrink-0 basis-auto mb-12 md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
                                 <form>
-                                    <div class="form-group mb-4">
-                                        <input type="text" class="form-control block
-              w-full
-              px-3
-              py-1.5
-              text-base
-              font-normal
-              text-gray-700
-              bg-white bg-clip-padding
-              border border-solid border-gray-300
-              rounded
-              transition
-              ease-in-out
-              m-0
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"
-                                            placeholder="Name" />
-                                    </div>
-                                    <div class="form-group mb-6">
-                                        <input type="email" class="form-control block
-              w-full
-              px-3
-              py-1.5
-              text-base
-              font-normal
-              text-gray-700
-              bg-white bg-clip-padding
-              border border-solid border-gray-300
-              rounded
-              transition
-              ease-in-out
-              m-0
-              focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
-                                            placeholder="Email address" />
-                                    </div>
+
+
                                     <label class="mb-0 block text-base
               font-normal
               text-gray-700">
-                                        Upload File
+                                        Upload Image
                                     </label>
 
                                     <div class="mb-2">
-                                        <input type="file" name="file" id="file" class="sr-only" />
-                                        <label
-                                            for="file"
-                                            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
-                                        >
-                                            <div>
-                                                <span class="mb-0 block text-xl font-semibold text-[#07074D]">
-                                                    Drop files here
-                                                </span>
-                                                <span class="mb-0 block text-base font-medium text-[#6B7280]">
-                                                    Or
-                                                </span>
-                                                <span
-                                                    class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
-                                                >
-                                                    Browse
-                                                </span>
-                                            </div>
-                                        </label>
+                                        <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-sm border  cursor-pointer" aria-describedby="file_input_help" id="file_input" type="file"
+                                            onChange={uploadImage}
+                                        />
                                     </div>
                                     <div class="form-group mb-2">
                                         <textarea class="
@@ -212,7 +178,7 @@ const TakeConsultation = () => {
               ease-in-out
               m-0
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-            " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
+            " id="exampleFormControlTextarea13" rows="3" placeholder="Please descricbe your problem"></textarea>
                                     </div>
                                     <button type="submit" class="
             w-full

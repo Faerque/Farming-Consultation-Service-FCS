@@ -25,17 +25,34 @@ const Services = () => {
     }, []);
 
     return (
-        <div className=''>
+        <section class="pt-10 pb-8 lg:pt-[120px] lg:pb-[90px]">
+            <div class="container mx-auto">
+                <div class="-mx-4 flex flex-wrap">
+                    <div class="w-full px-4">
+                        <div class="mx-auto mb-12 max-w-[510px] text-center lg:mb-20">
+                            <span class="text-primary mb-2 block text-lg font-semibold">
+                                Our Services
+                            </span>
+                            <h2
+                                class="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px]"
+                            >
+                                What We Offer
+                            </h2>
+                            <p class="text-body-color text-base">
+                                There are many variations of passages of Lorem Ipsum available but
+                                the majority have suffered alteration in some form.
+                            </p>
+                        </div>
+                        <div class="-mx-4 flex flex-wrap">
+                            {
+                                serviceData.map(service => <Service service={service} />)
+                            }
 
-            <div className=''>
-                <div className=''>
-                    <div className='flex m-32 grid grid-rows-3 grid-flow-col gap-2'>
-                        {serviceData.map((service) => <Service key={service.id} service={service} />)}
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
+        </section>
     );
 };
 

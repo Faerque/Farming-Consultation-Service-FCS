@@ -34,12 +34,10 @@ const CheckingForVerifiedUser = () => {
 
     // if userReq and user's email is matched then show the user's data
     const filterUser = users.find(user => user.email === userReq?.email);
-    // console.log(filterUser);
 
-    // const { name, email, phone, address, nid, isVerified } = userReq || {};
-
-    // console.log(name, email, phone, address, nid, isVerified);
-
+    // console.log(userReq.age);
+    // console.log(filterUser._id);
+    // console.log(userReq.gender);
     const handleVerifyUser = async () => {
         try {
             await fetch(`/api/users/updateUser/${filterUser._id}`, {
@@ -54,8 +52,11 @@ const CheckingForVerifiedUser = () => {
                     picture: userReq.picture,
                     NID: userReq.NID,
                     phone: userReq.phone,
+                    age: userReq.age,
+                    gender: userReq.gender,
                     address: userReq.address,
                     updated: new Date().toISOString()
+
                 }),
 
             })
@@ -76,35 +77,36 @@ const CheckingForVerifiedUser = () => {
                                 {loading ? <div className='p-20'>
                                     <SpinnerLoading />
                                 </div>
-                                    : (<section class="border-solid border-2 p-14 rounded-lg border-sky-300  text-gray-800">
-                                        <div class="flex flex-wrap">
-                                            <div class="grow-0 shrink-0 basis-auto md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
-                                                <h2 class="text-3xl font-bold ">
+                                    : (<section className="border-solid border-2 p-14 rounded-lg border-sky-300  text-gray-800">
+                                        <div className="flex flex-wrap">
+                                            <div className="grow-0 shrink-0 basis-auto md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
+                                                <h2 className="text-3xl font-bold ">
                                                     User verification Request
                                                 </h2>
-                                                <small class="text-red-500 mb-1">
+                                                <small className="text-red-500 mb-1">
                                                     User verification is the most important part of the system. please verify the user carefully.
                                                 </small>
-
-                                                <div class="flex flex-wrap">
-                                                    <div class="grid grid-cols-1 gap-5 flex items-center">
-                                                        <p class="font-bold">Requested User Photo:</p>
-                                                        <div class="mb-3">
-
+                                                <br />
+                                                <div className="flex flex-wrap">
+                                                    <div className="grid grid-cols-1 gap-5 flex items-center">
+                                                        <p className="font-bold">Requested User Photo:</p>
+                                                        <div className="mb-3">
+                                                            <img src={userReq.picture} className="max-w-full max-h-60 rounded-lg" alt="" />
                                                         </div>
                                                     </div>
-                                                    <div class="grid grid-cols-1 gap-5 flex items-center">
-                                                        <p class="font-bold">Requested User NID:</p>
-                                                        <div class="mb-3">
-                                                            <img src={userReq.NID} class="max-w-full max-h-60 rounded-lg" alt="" />
+                                                    <div className="grid grid-cols-1 gap-5 flex items-center">
+                                                        <p className="font-bold">Requested User NID:</p>
+                                                        <div className="mb-3">
+                                                            <img alt='user-nid' className="max-w-full h-auto rounded-lg transition-all duration-300 blur-sm hover:blur-none" src={userReq.NID} />
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="grow-0 shrink-0 basis-auto mb-12 md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
+                                            <div className="grow-0 shrink-0 basis-auto mb-12 md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
                                                 <form>
-                                                    <div class="form-group mb-4">
-                                                        <input type="text" class="form-control block
+                                                    <div className="form-group mb-4">
+                                                        <input type="text" className="form-control block
 w-full
 px-3
 py-1.5
@@ -120,8 +122,8 @@ m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"
                                                             placeholder="Name" />
                                                     </div>
-                                                    <div class="form-group mb-6">
-                                                        <input type="email" class="form-control block
+                                                    <div className="form-group mb-6">
+                                                        <input type="email" className="form-control block
 w-full
 px-3
 py-1.5
@@ -137,35 +139,35 @@ m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
                                                             placeholder="Email address" />
                                                     </div>
-                                                    <label class="mb-0 block text-base
+                                                    <label className="mb-0 block text-base
 font-normal
 text-gray-700">
                                                         Upload File
                                                     </label>
 
-                                                    <div class="mb-2">
-                                                        <input type="file" name="file" id="file" class="sr-only" />
+                                                    <div className="mb-2">
+                                                        <input type="file" name="file" id="file" className="sr-only" />
                                                         <label
                                                             for="file"
-                                                            class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
+                                                            className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
                                                         >
                                                             <div>
-                                                                <span class="mb-0 block text-xl font-semibold text-[#07074D]">
+                                                                <span className="mb-0 block text-xl font-semibold text-[#07074D]">
                                                                     Drop files here
                                                                 </span>
-                                                                <span class="mb-0 block text-base font-medium text-[#6B7280]">
+                                                                <span className="mb-0 block text-base font-medium text-[#6B7280]">
                                                                     Or
                                                                 </span>
                                                                 <span
-                                                                    class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
+                                                                    className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
                                                                 >
                                                                     Browse
                                                                 </span>
                                                             </div>
                                                         </label>
                                                     </div>
-                                                    <div class="form-group mb-2">
-                                                        <textarea class="
+                                                    <div className="form-group mb-2">
+                                                        <textarea className="
 form-control
 block
 w-full
@@ -183,7 +185,7 @@ m-0
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
 " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
                                                     </div>
-                                                    <button type="submit" class="
+                                                    <button type="submit" className="
 w-full
 px-6
 py-2.5
