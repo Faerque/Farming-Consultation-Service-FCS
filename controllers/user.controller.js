@@ -79,11 +79,13 @@ const updateUser = asyncHandler(async (req, res) => {
         user.isVerified = req.body.isVerified || user.isVerified;
         user.picture = req.body.picture || user.picture;
         user.NID = req.body.NID || user.NID;
+        user.gender = req.body.gender || user.gender;
+        user.age = req.body.age || user.age;
         user.phone = req.body.phone || user.phone;
         user.address = req.body.address || user.address;
         const updatedUser = await user.save();
         res.json({
-            _id: updatedUser._id,
+
             name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
@@ -91,6 +93,8 @@ const updateUser = asyncHandler(async (req, res) => {
             picture: updatedUser.picture,
             NID: updatedUser.NID,
             phone: updatedUser.phone,
+            age: updatedUser.age,
+            gender: updatedUser.gender,
             address: updatedUser.address,
         });
     } else {

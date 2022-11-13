@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 // here we will create user verification
 const createUserVerification = asyncHandler(async (req, res) => {
-    const { name, email, picture, NID, phone, address } = req.body;
+    const { name, email, picture, gender, age, NID, phone, address } = req.body;
     // a user can send multiple verification request so dont need to check by email
 
     // here we create user
@@ -13,6 +13,8 @@ const createUserVerification = asyncHandler(async (req, res) => {
         email,
         picture,
         NID,
+        age,
+        gender,
         phone,
         address,
     });
@@ -25,6 +27,8 @@ const createUserVerification = asyncHandler(async (req, res) => {
             picture: user.picture,
             NID: user.NID,
             phone: user.phone,
+            age: user.age,
+            gender: user.gender,
             address: user.address,
         });
     } else {

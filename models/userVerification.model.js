@@ -24,8 +24,17 @@ const userVerificationSchema = mongoose.Schema({
     },
     phone: {
         type: Number,
-        default: " ",
         required: true,
+        default: " ",
+    },
+    gender: {
+        type: String,
+        default: " ",
+    },
+    age: {
+        type: Number,
+        required: true,
+        default: " ",
     },
     address: {
         type: String,

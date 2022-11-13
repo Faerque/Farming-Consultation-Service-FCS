@@ -35,13 +35,22 @@ const userSchema = mongoose.Schema({
     },
     NID: {
         type: String,
-        required: true,
-        default: "Nothing",
+
+
     },
     phone: {
         type: String,
         required: true,
-        default: "Nothing",
+        default: " ",
+    },
+    age: {
+        type: Number,
+
+    },
+    gender: {
+        type: String,
+        default: " ",
+
     },
     address: {
         type: String,
