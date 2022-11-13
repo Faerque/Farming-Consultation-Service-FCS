@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// user verfiication model
+// user verification model
 
 const userVerificationSchema = mongoose.Schema({
     name: {
