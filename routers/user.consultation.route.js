@@ -11,6 +11,6 @@ app.use(cors());
 
 // create a consultation route
 router.route('/addConsultation').post(consultation.createConsultation);
-router.route('/allConsultation').get(consultation.getAllConsultation);
+router.route('/consultations').get(consultation.getAllConsultation);
 
 module.exports = router;
