@@ -27,7 +27,7 @@ const AddService = () => {
                     'Content-Type': 'application/json'
                 }
             }
-            await axios.post('/api/services/addService', ServiceData, config);
+            await axios.post('https://server-fcs.onrender.com/api/services/addService', ServiceData, config);
             setTimeout(() => {
                 setLoading(false);
                 setSuccess(true);

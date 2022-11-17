@@ -12,7 +12,7 @@ const Services = () => {
         // fetch data from server
         const fetchData = async () => {
             try {
-                await axios.get('api/services')
+                await axios.get('https://server-fcs.onrender.com/api/services')
                     .then(res => {
                         console.log(res.data);
                         setServiceData(res.data);

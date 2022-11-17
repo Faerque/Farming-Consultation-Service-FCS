@@ -15,7 +15,7 @@ const UserData = () => {
     // fetching users data from server
     useEffect(() => {
         setLoading(true);
-        axios.get('api/users/allUsers')
+        axios.get('https://server-fcs.onrender.com/api/users/allUsers')
             .then(res => {
                 setUser(res.data);
                 setLoading(false);

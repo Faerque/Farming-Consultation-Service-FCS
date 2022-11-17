@@ -40,7 +40,7 @@ const CheckingForVerifiedUser = () => {
     // console.log(userReq.gender);
     const handleVerifyUser = async () => {
         try {
-            await fetch(`/api/users/updateUser/${filterUser._id}`, {
+            await fetch(`https://server-fcs.onrender.com/api/users/updateUser/${filterUser._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

@@ -43,7 +43,7 @@ const UserLogin = () => {
                 }
             }
             setLoading(true);
-            const { data } = await axios.post('api/users/login', { email, password }, {
+            const { data } = await axios.post('https://server-fcs.onrender.com/api/users/login', { email, password }, {
                 email,
                 password
             }, config);

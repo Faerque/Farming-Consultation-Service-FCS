@@ -16,7 +16,7 @@ const TakeConsultation = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data } = await axios.get(`/api/services/selectService/${id}`);
+                const { data } = await axios.get(`https://server-fcs.onrender.com/api/services/selectService/${id}`);
                 setConsultation(data);
                 setLoading(false);
             } catch (error) {

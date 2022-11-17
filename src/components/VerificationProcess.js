@@ -38,7 +38,7 @@ const VerificationProcess = () => {
             }
             setLoading(true);
             setButtonDisabled(true);
-            const { data } = await axios.post('/api/userVerificationProcess/addVerification',
+            const { data } = await axios.post('https://server-fcs.onrender.com/api/userVerificationProcess/addVerification',
                 { name, email, address, phone, gender, age, picture, NID },
                 config);
             setTimeout(() => {

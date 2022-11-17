@@ -14,7 +14,7 @@ const VerificationRequest = () => {
 
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('/api/userVerificationProcess/')
+        fetch('https://server-fcs.onrender.com/api/userVerificationProcess/')
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -32,7 +32,7 @@ const VerificationRequest = () => {
 
 
     useEffect(() => {
-        fetch('api/users/allUsers')
+        fetch('https://server-fcs.onrender.com/api/users/allUsers')
             .then(res => res.json())
             .then(data => {
 

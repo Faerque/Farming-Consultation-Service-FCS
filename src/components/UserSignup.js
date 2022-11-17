@@ -42,7 +42,7 @@ const UserSignup = () => {
                     }
                 }
                 setLoading(true);
-                const { data } = await axios.post('/api/users/register',
+                const { data } = await axios.post('https://server-fcs.onrender.com/api/users/register',
                     { name, email, password, }, config);
                 setLoading(false);
                 setSignUpSuccess(true);
