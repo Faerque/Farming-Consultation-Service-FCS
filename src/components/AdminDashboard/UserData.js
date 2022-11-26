@@ -33,18 +33,12 @@ const UserData = () => {
         if (selects === "Not Verified") {
             return user.isVerified === false
         }
-
         else {
             return user
         }
     }
 
-    // formating date which got from server
-    const formatDate = (date) => {
-        const newDate = new Date(date);
 
-        return newDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
 
 
     return (
@@ -122,7 +116,7 @@ const UserData = () => {
             <div className='mt-20'>
                 <FooterSm />
             </div>
-        </main >
+        </main>
     );
 };
 

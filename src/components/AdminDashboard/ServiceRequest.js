@@ -1,8 +1,49 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import FooterSm from '../Footer/FooterSm';
 import AdminSidePanel from './AdminSidePanel';
+import dateFormat from "dateformat";
+import ServiceRequestForm from './ServiceRequestForm';
+// 
+
 
 const ServiceRequest = () => {
+    const [serviceRequest, setServiceRequest] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalData, setModalData] = useState({});
+    const [selects, setSelects] = useState(" ");
+    const [searchResult, setSearchResult] = useState("");
+    console.log(serviceRequest);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get('https://server-fcs.onrender.com/api/userConsultation/consultations');
+                setServiceRequest(res.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, []);
+    console.log(showModal);
+    console.log(modalData);
+
+    const closeModal = () => {
+        setShowModal(false);
+    }
+
+    console.log(serviceRequest);
+    const filterBySearch = (service) => {
+        if (searchResult === " ") {
+            return service;
+        } else if (service.consultationName.toLowerCase().includes(searchResult.toLowerCase())) {
+            return service;
+        } else if (service.userName.toLowerCase().includes(searchResult.toLowerCase())) {
+            return service;
+        }
+    }
+
     return (
         <section>
             <div class="flex">
@@ -11,143 +52,112 @@ const ServiceRequest = () => {
                 </div>
                 <div class="flex-1 w-64 ">
                     <div className='flex'>
-                        <div className='ml-24 mr-24 mt-20 '>
+                        <div className='m-20'>
                             <div class="overflow-hidden bg-white shadow sm:rounded-lg">
-                                <div>
 
-                                    {/* <!-- Card is full width. Use in 8 col grid for best view. -->
-            <!-- Card code block start --> */}
-                                    <div class="mx-auto bg-white dark:bg-gray-800 shadow rounded w-full">
-                                        <div class="py-6 xl:px-8 lg:px-8 md:px-8 px-4 flex justify-between items-center">
-                                            <p class="font-bold text-sm xl:text-lg lg:text-lg md:text-lg text-gray-800 dark:text-gray-100">23 December, <span class="text-gray-500">Sunday</span></p>
-                                            <div class="relative">
-                                                <button aria-label="dropdown" class="focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 relative z-0 bg-gray-100 dark:bg-gray-700 flex items-center justify-between w-full cursor-pointer text-xs form-select text-gray-600 dark:text-gray-400 md:p-3 p-2 rounded bg-transparent" data-menu>
-                                                    <p class="leading-3 tracking-normal font-normal text-sm">
-                                                        Show:
-                                                        <span class="text-indigo-700 dark:text-indigo-600 mr-2">This week</span>
-                                                    </p>
-                                                    <div class="cursor-pointer">
-                                                        <img class="hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/8_col_listing_card_with_stats_and_filters-svg1.svg" alt="arrow up" />
-                                                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/8_col_listing_card_with_stats_and_filters-svg2.svg" alt="arrow down" />
+                                <div class="overflow-x-auto relative  sm:rounded-lg">
 
-
-                                                    </div>
-                                                </button>
-                                                <ul class="invisible z-10 transition duration-300 opacity-0 bg-white dark:bg-gray-700 shadow rounded mt-2 w-40 py-1 absolute">
-                                                    <a href="#" class="focus:outline-none focus:underline"><li class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Previous week</li></a>
-                                                    <a href="#" class="focus:outline-none focus:underline"><li class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-gray-100 px-3 font-normal">Next week</li></a>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="xl:px-8 lg:px-8 md:px-8 px-4 py-4 bg-white dark:bg-gray-800">
-                                            <div class="xl:flex lg:flex md:flex sm:flex">
-                                                <div class="xl:w-1/4 w-full mb-2 xl:mb-0">
-                                                    <p class="text-sm text-gray-600 dark:text-gray-400 font-bold">Tasks Scheduled: 24</p>
-                                                </div>
-                                                <div class="xl:w-1/4 w-full mb-2 xl:mb-0">
-                                                    <p class="text-sm text-gray-600 dark:text-gray-400 font-bold">Tasks Pending: 15</p>
-                                                </div>
-                                                <div class="xl:w-1/4 w-full mb-2 xl:mb-0">
-                                                    <p class="text-sm text-gray-600 dark:text-gray-400 font-bold">Tasks Completed: 09</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="xl:px-8 lg:px-8 md:px-8 px-4 py-6 bg-white dark:bg-gray-800">
-                                            <div class="p-5 flex justify-between rounded mb-6 bg-gray-100 dark:bg-gray-700">
-                                                <div class="w-3/5">
-                                                    <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="mb-2 text-sm font-bold ">UX Team Skype Session</p></a>
-                                                    <ul>
-                                                        <li class="mb-2 text-xs text-gray-600 dark:text-gray-400">- Create a competitive analysis report, create personas and also design UX research reports.</li>
-                                                        <li class="text-xs text-gray-600 dark:text-gray-400">- Sitemap and information architecture visualizing the organized model of all the components and information contained in product.</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="w-3/12 flex flex-col items-end justify-between">
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">9am - 10am</p>
-                                                    <div class="bg-indigo-100 h-6 w-20 mb-4 md:mb-0 rounded-md flex items-center justify-center">
-                                                        <span class="text-xs text-indigo-700 dark:text-gray-400 font-normal">Meeting</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-5 flex justify-between rounded mb-6 bg-gray-100 dark:bg-gray-700">
-                                                <div class="w-3/5">
-                                                    <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="mb-4 text-sm font-bold ">UX Team Skype Session</p></a>
-                                                    <ul class="mb-5">
-                                                        <li class="mb-2 text-xs text-gray-600 dark:text-gray-400">- Create a competitive analysis report, create personas and also design UX research reports.</li>
-                                                        <li class="text-xs text-gray-600 dark:text-gray-400">- Sitemap and information architecture visualizing the organized model of all the components and information contained in product.</li>
-                                                    </ul>
-                                                    <div class="flex flex-wrap items-center">
-                                                        <div class="w-6 h-6 bg-cover bg-center rounded-full border border-white relative shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card21.jpg" alt="" />
-                                                        </div>
-                                                        <div class="w-6 h-6 bg-cover rounded-full -ml-1 border border-white shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card22.jpg" alt="" />
-                                                        </div>
-                                                        <div class="w-6 h-6 bg-cover rounded-full bg-center -ml-1 border border-white shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card23.jpg" alt="" />
-                                                        </div>
-                                                        <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="text-xs ml-1 ">+3 attendees</p></a>
-                                                    </div>
-                                                </div>
-                                                <div class="w-3/12 flex flex-col items-end justify-between">
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">9am - 10am</p>
-                                                    <div class="bg-red-100 h-6 w-20 mb-4 md:mb-0 rounded-md flex items-center justify-center">
-                                                        <span class="text-xs text-red-700 font-normal">Urgent</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-5 flex justify-between rounded mb-6 bg-gray-100 dark:bg-gray-700">
-                                                <div class="w-3/5">
-                                                    <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="mb-4 text-sm font-bold ">UX Team Skype Session</p></a>
-                                                    <ul class="mb-5">
-                                                        <li class="mb-2 text-xs text-gray-600 dark:text-gray-400">- Create a competitive analysis report, create personas and also design UX research reports.</li>
-                                                        <li class="text-xs text-gray-600 dark:text-gray-400">- Sitemap and information architecture visualizing the organized model of all the components and information contained in product.</li>
-                                                    </ul>
-                                                    <div class="flex flex-wrap items-center">
-                                                        <div class="w-6 h-6 bg-cover bg-center rounded-full border border-white relative shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card21.jpg" alt="" />
-                                                        </div>
-                                                        <div class="w-6 h-6 bg-cover rounded-full -ml-1 border border-white shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card22.jpg" alt="" />
-                                                        </div>
-                                                        <div class="w-6 h-6 bg-cover rounded-full bg-center -ml-1 border border-white shadow">
-                                                            <img class="h-full w-full object-cover rounded-full" src="https://dh-ui.s3.amazonaws.com/assets/webapp/layout/grid_cards/grid_card23.jpg" alt="" />
-                                                        </div>
-                                                        <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="text-xs ml-1 ">+3 attendees</p></a>
-                                                    </div>
-                                                </div>
-                                                <div class="w-3/12 flex flex-col items-end justify-between">
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">9am - 10am</p>
-                                                    <div class="bg-yellow-100 h-6 w-20 mb-4 md:mb-0 rounded-md flex items-center justify-center">
-                                                        <span class="text-xs text-yellow-700 font-normal">Personal</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-5 flex justify-between rounded bg-gray-100 dark:bg-gray-700">
-                                                <div class="w-3/5">
-                                                    <a href="#" class="text-gray-800 dark:text-gray-100 focus:text-gray-600 hover:text-gray-600 focus:underline focus:outline-none"><p class="mb-4 text-sm font-bold ">UX Team Skype Session</p></a>
-                                                    <ul class="mb-5">
-                                                        <li class="mb-2 text-xs text-gray-600 dark:text-gray-400">- Create a competitive analysis report, create personas and also design UX research reports.</li>
-                                                        <li class="text-xs text-gray-600 dark:text-gray-400">- Sitemap and information architecture visualizing the organized model of all the components and information contained in product.</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="w-3/12 flex flex-col items-end justify-between">
-                                                    <p class="text-xs text-gray-600 dark:text-gray-400">9am - 10am</p>
-                                                    <div class="bg-indigo-100 h-6 w-20 mb-4 md:mb-0 rounded-md flex items-center justify-center">
-                                                        <span class="text-xs text-indigo-700 dark:text-gray-400 font-normal">Meeting</span>
-                                                    </div>
-                                                </div>
+                                    <div className='m-0'>
+                                        <select value={selects} onChange={e => setSelects(e.target.value)}
+                                            className="select rounded-sm m-2 mb-1 select-ghost w-48 max-w-xs">
+                                            <option disabled selected>Sort by:</option>
+                                            <option>Request</option>
+                                            <option>New Request</option>
+                                        </select>
+                                        <div class="flex justify-center">
+                                            <div class="mb-3 xl:w-96">
+                                                <input
+                                                    type="search"
+                                                    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                                    value={searchResult}
+                                                    onChange={e => setSearchResult(e.target.value)}
+                                                    placeholder="Search by consultation name or user name"
+                                                />
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <!-- Card code block end --> */}
+                                    <table class=" w-full text-sm text-left text-gray-500 ">
+                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                                            <tr>
+                                                <th scope="col" class="py-3 px-6">
+                                                    Index
+                                                </th>
+                                                <th scope="col" class="py-3 px-6">
+                                                    Service Name
+                                                </th>
+                                                <th scope="col" class="py-3 px-6">
+                                                    Service Request by user
+                                                </th>
+                                                <th scope="col" class="py-3 px-6">
+                                                    User Phone Number
+                                                </th>
+                                                <th scope="col" class="py-3 px-6">
+                                                    Consultation Status
+                                                </th>
+                                                <th scope="col" class="py-3 px-6">
+                                                    Service Requested Date
+                                                </th>
+                                            </tr>
 
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                serviceRequest
+                                                    .sort((a, b) => {
+                                                        if (selects === "New Request") {
+                                                            return new Date(b.consultationRequestTime
+                                                            ) - new Date(a.consultationRequestTime
+                                                            )
+                                                        }
+                                                        if (selects === "Request") {
+                                                            return new Date(a.consultationRequestTime
+                                                            ) - new Date(b.consultationRequestTime
+                                                            )
+                                                        }
+                                                        return serviceRequest;
+
+                                                    })
+                                                    .filter((service) => filterBySearch(service))
+                                                    .map((service, index) =>
+                                                        <tr onClick={() => {
+                                                            setShowModal(true);
+                                                            setModalData(service);
+                                                        }} key={service._id} class=" bg-white border-b cursor-pointer dark:border-gray-700 hover:bg-gray-200 ">
+                                                            <th scope="row" class="py-4 px-6 font-medium text-gray-1200 whitespace-nowrap 1200">
+                                                                {index + 1}
+                                                            </th>
+                                                            <td class="py-4 px-6">
+                                                                {service.consultationName}
+                                                            </td>
+                                                            <td class="py-4 px-6">
+                                                                {service.userName}
+                                                            </td>
+                                                            <td class="py-4 px-6">
+                                                                {service.userPhone}
+                                                            </td>
+                                                            <td class="py-4 px-6">
+                                                                {service.consultationStatus.charAt(0).toUpperCase() + service.consultationStatus.slice(1)}
+                                                            </td>
+                                                            <td class="py-4 px-6">
+                                                                {dateFormat(service.consultationRequestTime, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
+
+                                <ServiceRequestForm modalData={modalData} modalIsOpen={showModal} closeModal={closeModal} ></ServiceRequestForm>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <FooterSm />
+            <div className='mt-20'>
+                <FooterSm />
+            </div>
         </section>
     );
 };

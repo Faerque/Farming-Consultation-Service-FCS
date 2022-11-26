@@ -14,44 +14,48 @@
 // 6.                 If(omaring[i]=”|”) print(omaring[i))
 // 7. Else print(“no left recusion”)
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-
-int main(){
-    int n;
+int main()
+{
+    int n,c=0;
+    printf("Enter the number of productions: ");
+    scanf("%d", &n);
     char omaring[100];
-    printf("Enter the number of omaring: ");
-    scanf("%d",&n);
-    int a=0;
-    for(int i=0;i<n;i++){
-        printf("Enter the omaring: ");
-        scanf("%s",omaring);
-        int len = strlen(omaring);
-        if(omaring[0]==omaring[3]){
+    for (int i = 0; i < n; i++)
+    {
+       
+        gets(omaring);
+        if (omaring[0] == omaring[3])
+        {
             printf("Yes left recursion\n");
-            printf("%c->",omaring[0]);
-            for(int i=4;i<len;j++){
-                if(omaring[i]=='|'){
-                a=i;
-                for(int j=i+1;j<len;j++){
-                    printf("%c",omaring[j]);
-
+            printf(omaring[0], "%s ->");
+            int len = strlen(omaring);
+            for (int i = 4; i < len; i++)
+            {
+                if (omaring[i] == '|')
+                {
+                    c=i;
+                    for (int j = c+1; j < len; j++)
+                    {
+                        printf(omaring[j]);
                     }
                 }
             }
-            printf("%c'\n",omaring[0]);
-            printf("%c'->",omaring[0]);
-            for(int i=4;i<a;i++){
-                printf("%c",omaring[i]);
+            printf(omaring[0], "`\n");
+            printf(omaring[0], "`->");
+            for(int i=4;i<c;i++)
+            {
+                printf(omaring[i]);
             }
-            printf("e\n");
+            printf(omaring[0], "`|$\n");
         }
-        else{
-            printf("No left recursion\n");
-        }
+    else
+    {
+        printf("No left recursion");
+    }
     }
     return 0;
-    }
+}

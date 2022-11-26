@@ -10,7 +10,7 @@ const MaintainService = () => {
     const [loading, setLoading] = useState(true);
     // fetching services from server
     useEffect(() => {
-        fetch('api/services')
+        fetch('https://server-fcs.onrender.com/api/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data);

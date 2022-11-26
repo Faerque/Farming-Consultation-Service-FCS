@@ -13,24 +13,31 @@ const CheckingForVerifiedUser = () => {
     const [users, setUser] = useState([]);
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id');
+
     useEffect(() => {
-        axios.get(`/api/userVerificationProcess/checkingVerification/${id}`)
+        axios.get(`https://server-fcs.onrender.com/api/userVerificationProcess/checkingVerification/${id}`)
             .then(res => {
                 console.log(res.data);
                 setUserReq(res.data);
                 setLoading(false);
             })
             .catch(error => console.log(error));
-    }, [id]);
-
-    useEffect(() => {
-        axios.get('api/users/allUsers')
+        axios.get('https://server-fcs.onrender.com/api/users/allUsers')
             .then(res => {
                 setUser(res.data);
                 setLoading(false);
             })
             .catch(error => console.log(error));
-    }, []);
+    }, [id]);
+
+    // useEffect(() => {
+    //     axios.get('https://server-fcs.onrender.com/api/users/allUsers')
+    //         .then(res => {
+    //             setUser(res.data);
+    //             setLoading(false);
+    //         })
+    //         .catch(error => console.log(error));
+    // }, []);
 
     // if userReq and user's email is matched then show the user's data
     const filterUser = users.find(user => user.email === userReq?.email);
@@ -56,7 +63,6 @@ const CheckingForVerifiedUser = () => {
                     gender: userReq.gender,
                     address: userReq.address,
                     updated: new Date().toISOString()
-
                 }),
 
             })
@@ -123,25 +129,10 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id=
                                                             placeholder="Name" />
                                                     </div>
                                                     <div className="form-group mb-6">
-                                                        <input type="email" className="form-control block
-w-full
-px-3
-py-1.5
-text-base
-font-normal
-text-gray-700
-bg-white bg-clip-padding
-border border-solid border-gray-300
-rounded
-transition
-ease-in-out
-m-0
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
+                                                        <input type="email" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
                                                             placeholder="Email address" />
                                                     </div>
-                                                    <label className="mb-0 block text-base
-font-normal
-text-gray-700">
+                                                    <label className="mb-0 block text-base font-normal text-gray-700">
                                                         Upload File
                                                     </label>
 
@@ -167,37 +158,9 @@ text-gray-700">
                                                         </label>
                                                     </div>
                                                     <div className="form-group mb-2">
-                                                        <textarea className="
-form-control
-block
-w-full
-px-3
-py-1.5
-text-base
-font-normal
-text-gray-700
-bg-white bg-clip-padding
-border border-solid border-gray-300
-rounded
-transition
-ease-in-out
-m-0
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-" id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
+                                                        <textarea className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
                                                     </div>
-                                                    <button type="submit" className="
-w-full
-px-6
-py-2.5
-bg-blue-600
-text-white
-font-medium
-text-xs
-leading-tight
-uppercase
-rounded
-shadow-md
-hover:bg-blue-700 hover:shadow-lg
+                                                    <button type="submit" className="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg
 focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
 active:bg-blue-800 active:shadow-lg
 transition

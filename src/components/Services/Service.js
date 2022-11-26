@@ -34,11 +34,10 @@ const Service = ({ service }) => {
                     </svg>
                 </div>
                 <h4 class="text-dark mb-3 text-xl font-semibold">
-                    Refreshing Design
+                    {name}
                 </h4>
                 <p class="text-body-color">
-                    We dejoy working with discerning clients, people for whom qualuty,
-                    service, integrity & aesthetics.
+                    {description}
                 </p>
                 <button onClick={() => handleNext(_id)} class="inline-flex items-center mt-2 p-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Take Consultation

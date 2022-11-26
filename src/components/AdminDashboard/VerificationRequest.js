@@ -22,16 +22,6 @@ const VerificationRequest = () => {
                 setLoading(false);
             })
             .catch(error => console.log(error));
-    }, []);
-
-    const handleNext = (id) => {
-        console.log(id);
-        navigate({ pathname: '/checkingForVerifiedUser', search: `?id=${id}` });
-    };
-
-
-
-    useEffect(() => {
         fetch('https://server-fcs.onrender.com/api/users/allUsers')
             .then(res => res.json())
             .then(data => {
@@ -41,6 +31,24 @@ const VerificationRequest = () => {
             })
             .catch(error => console.log(error));
     }, []);
+
+    const handleNext = (id) => {
+        console.log(id);
+        navigate({ pathname: '/checkingForVerifiedUser', search: `?id=${id}` });
+    };
+
+
+
+    // useEffect(() => {
+    //     fetch('https://server-fcs.onrender.com/api/users/allUsers')
+    //         .then(res => res.json())
+    //         .then(data => {
+
+    //             setAllUserData(data);
+    //             setLoading(false);
+    //         })
+    //         .catch(error => console.log(error));
+    // }, []);
     // need to show the data who is not verified both in database user and userVerificationProcess
     // const filterUser = allUserData.filter(data => {
     //     const user = verificationRequest.find(user => user.email === data.email && data.isVerified === false);

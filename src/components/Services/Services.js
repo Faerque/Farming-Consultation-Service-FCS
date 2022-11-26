@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import SpinnerLoading from '../SpinnerLoading';
 import Service from './Service';
 
 
@@ -7,15 +8,17 @@ const Services = () => {
 
     const [serviceData, setServiceData] = useState([]);
     console.log(serviceData);
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         // fetch data from server
         const fetchData = async () => {
             try {
+
                 await axios.get('https://server-fcs.onrender.com/api/services')
                     .then(res => {
                         console.log(res.data);
                         setServiceData(res.data);
+                        setLoading(false);
                     })
             } catch (error) {
                 console.log(error);
@@ -23,7 +26,7 @@ const Services = () => {
         }
         fetchData();
     }, []);
-
+    <SpinnerLoading />
     return (
         <section class="pt-10 pb-8 lg:pt-[120px] lg:pb-[90px]">
             <div class="container mx-auto">
@@ -45,9 +48,8 @@ const Services = () => {
                         </div>
                         <div class="-mx-4 flex flex-wrap">
                             {
-                                serviceData.map(service => <Service service={service} />)
+                                loading === true ? <SpinnerLoading /> : serviceData.map(service => <Service key={service._id} service={service} />)
                             }
-
                         </div>
                     </div>
                 </div>

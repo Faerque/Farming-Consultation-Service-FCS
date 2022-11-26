@@ -234,7 +234,7 @@ const VerificationProcess = () => {
                                 </div>
                                 <div class="form-group mb-2">
                                     <label class="font-bold text-gray-700" htmlFor="number">Enter your phone number</label>
-                                    <input type="number" class="form-control block
+                                    <input type="tel" class="form-control block
               w-full
               px-3
               py-1.5
