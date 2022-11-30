@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import SpinnerLoading from './SpinnerLoading';
 
 const TakeConsultation = () => {
@@ -90,12 +90,12 @@ const TakeConsultation = () => {
     return (
         <div className=''>
 
-            <div class="container my-14 px-6 mx-auto">
+            <div class="container my-10 px-6 mx-auto">
                 {success ? <div>
                     <div className="alert alert-success shadow-lg">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span>Your purchase has been confirmed!</span>
+                            <span>Your Consultation Request has been send!</span>
                         </div>
                     </div>
                 </div> : <div>
@@ -103,13 +103,13 @@ const TakeConsultation = () => {
 
                         <SpinnerLoading />
                     </div>
-                        : (<section class="border-solid border-2 p-14 rounded-lg border-sky-300  text-gray-800">
+                        : (<section class="border-solid border-2 p-2 rounded-md border-primary  text-gray-800">
                             <div class="flex flex-wrap">
-                                <div class="grow-0 shrink-0 mt-0 mb-0 basis-auto md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
+                                <div class="grow-0 shrink-0 mt-5 mb-0 basis-auto md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
                                     <h2 class="text-3xl font-bold mb-3">{consultation.name}</h2>
                                     <div class="grid grid-cols-1 gap-4 flex items-center">
                                         <div class="mb-3">
-                                            <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class="max-w-full max-h-60 rounded-lg" alt="" />
+                                            <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg" class="max-w-full max-h-60 rounded-md" alt="consultationImg" />
                                         </div>
                                     </div>
                                     <p class="text-gray-500 mb-3">
@@ -257,30 +257,15 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                                         </div>
                                         <button type="submit" class="
 w-full
-px-6
-py-2.5
-bg-blue-600
-text-white
-font-medium
-text-xs
-leading-tight
-uppercase
-rounded
-shadow-md
-hover:bg-blue-700 hover:shadow-lg
-focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-active:bg-blue-800 active:shadow-lg
-transition
-duration-150
-ease-in-out">Send</button>
+btn btn-outline btn-primary rounded-md">Send</button>
                                     </form>
                                 </div>
                             </div>
 
                         </section>)}
+                    <Link to='/' className='mt-1 rounded-md btn btn-outline' >back to home</Link>
                 </div>}
             </div>
-
         </div>
     );
 };

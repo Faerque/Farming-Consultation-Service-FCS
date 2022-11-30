@@ -2,15 +2,21 @@ import React from 'react';
 
 const Header = () => {
     return (
-        <main className="place-items-center">
-            <div className="hero-content text-center">
-                <div className="max-w-md">
-                    <h1 className="text-5xl font-bold">Hello there</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button className="btn btn-primary">Get Started</button>
+        <div>
+            <section class="mt-2 mb-20">
+                <div class="relative overflow-hidden rounded-md bg-no-repeat bg-cover" style={{ backgroundPosition: "50%", backgroundImage: `URL('https://mdbootstrap.com/img/new/textures/full/142.jpg')`, height: "500px" }}></div>
+                <div class="container mx-auto px-6 md:px-12 xl:px-32">
+                    <div class="text-center text-gray-800">
+                        <div class="block rounded-lg shadow-lg px-6 py-12 md:py-16 md:px-12" style={{ marginTop: "-170px", background: "hsla(0, 0%, 100%, 0.7)", backdropFilter: "blur(30px)" }}>
+                            <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">The best offer on the market <br /><span class="text-primary">for your business</span></h1>
+                            <a class="btn btn-outline btn-primary" data-mdb-ripple="true" data-mdb-ripple-color="light" href="#!" role="button">Get started</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </main >
+            </section>
+
+
+        </div>
     );
 };
 

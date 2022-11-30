@@ -5,7 +5,7 @@ import UserAvatar from '../assets/UserAvatar.svg'
 import FooterSm from './Footer/FooterSm';
 import axios from 'axios';
 import Loading from './Loading';
-import { UserContext } from '../App';
+import Logo from '../assets/Logo.png';
 
 const UserLogin = () => {
 
@@ -18,7 +18,7 @@ const UserLogin = () => {
     const [showError, setShowError] = useState(false);
     const [isCapsLockIsOn, setCapsLockIsOn] = useState(false);
     const [loginSuccess, setLoginSuccess] = useState(false);
-    const [loggedInUser, setLoggedInUser] = useState(UserContext);
+
     // function Caps lock is on or not
     const handleCapsLock = (e) => {
         if (e.getModifierState("CapsLock")) {
@@ -55,7 +55,7 @@ const UserLogin = () => {
             // here we set it into local storage in object format because we can't set it in string format in local storage
             localStorage.setItem('userInfo', JSON.stringify(signInUser));
             localStorage.setItem('userVerified', JSON.stringify(userVerified));
-            setLoggedInUser(signInUser);
+
             setLoading(false);
             // giving a delay of 1 second to show the loading screen
             setLoginSuccess(true);
@@ -77,7 +77,7 @@ const UserLogin = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img className="mx-auto h-12 w-auto" src={UserAvatar} alt="user login" />
+                        <img className="mx-auto h-20 w-auto" src={Logo} alt="FCS" />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">Sign in to your account</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             Or <br />
@@ -111,22 +111,20 @@ const UserLogin = () => {
                         </div> */}
 
                         {loading === true && <div className='flex w-full justify-center' ><Loading /></div>}
-                        {showError === true && <div class="alert alert-error shadow-lg">
+                        {showError === true && <div class="alert rounded-md alert-error shadow-md">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 <span>{error}</span>
                             </div>
                         </div>}
-                        {loginSuccess === true && <div class="alert alert-success shadow-lg">
+                        {loginSuccess === true && <div class="alert rounded-md alert-success shadow-md">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 <span>Successfully login</span>
                             </div>
                         </div>}
-                        <div className='place-content-center' >
+                        <div className='place-content-center'>
                             <button type="submit" className="flex w-full justify-center btn btn-outline btn-success">
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                </span>
                                 Sign in
                             </button>
                         </div>
@@ -135,7 +133,7 @@ const UserLogin = () => {
                     {showModal && <ForgetPassword setShowModal={setShowModal} />}
                 </div>
             </div>
-            <FooterSm></FooterSm>
+
         </section>
     );
 };

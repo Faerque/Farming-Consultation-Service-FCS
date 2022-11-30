@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+import logo from '../../assets/Logo.png'
+
+
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -20,44 +24,134 @@ const Navbar = () => {
 
     console.log(userInfo);
     return (
-        <main className="navbar bg-base-100">
-            <div className="flex-1">
-                <Link to='/' className="btn btn-ghost normal-case text-xl">daisyUI</Link>
-            </div>
-            <div className="flex-none">
-                <ul className="menu menu-horizontal p-0">
-                    <li><Link to="/marketPlace">Market Place</Link></li>
-                    <li >
-                        <Link to="/informationAndLatestNews">News and Update</Link>
-                    </li>
-                    <li><Link to='/services'>Services</Link></li>
-                </ul>
-                <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                        <div class="w-10 rounded-full">
-                            {userInfo ? <img alt='userImage' src={userInfo.picture} /> : null}
+        <div>
+            {!isMobile ? <div>
+                <nav class="bg-neutral">
+                    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+                        <a href="https://flowbite.com" class="flex items-center">
+                            <img src={logo} class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+                            <label class="self-center text-xl font-semibold whitespace-nowrap text-white">Farming Consultation Services</label>
+                        </a>
+                        <div>
                         </div>
-                    </label>
-                    {userInfo ? <div>
-                        <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <Link to='dashboard' className="justify-between">
-                                    {userInfo.name}
-                                </Link>
-                            </li>
-                            <li>
-                                {userInfo.isAdmin ? <Link to='F7d32fab841334cdb7b6' className="justify-between">
-                                    Got to Admin Dashboard
-                                </Link> : null}
-                            </li>
-                            <li><button onClick={logoutHandler} >Logout</button></li>
-                        </ul>
-                    </div> : <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52" >
-                        <li><Link to='/login'>Login</Link></li>
-                    </ul>}
-                </div>
+                        <div class="flex items-center">
+                            <a href="tel:5541251234" class="mr-6 text-lg font-medium text-gray-500 text-white hover:underline">(555) 412-1234</a>
+                            {!userInfo ? <div>
+
+                                <Link to="/login" class="text-xl font-medium text-blue-600  hover:underline">Login</Link>
+                            </div> :
+                                <div class="dropdown dropdown-end">
+                                    <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
+                                        <div class="w-10 rounded-full">
+                                            {userInfo ? <img alt='userImage' src={userInfo.picture} /> : null}
+                                        </div>
+                                    </label>
+                                    {userInfo ? <div>
+                                        <ul tabIndex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-md w-52">
+                                            <li>
+                                                <Link to='dashboard' className="justify-between">
+                                                    {userInfo.name}
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                {userInfo.isAdmin ? <Link to='F7d32fab841334cdb7b6' className="justify-between">
+                                                    Got to Admin Dashboard
+                                                </Link> : null}
+                                            </li>
+                                            <li><button onClick={logoutHandler} >Logout</button></li>
+                                        </ul>
+                                    </div> : " "}
+                                </div>}
+                        </div>
+                    </div>
+                </nav>
+                <nav class="bg-primary">
+                    <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
+                        <div class="flex items-center">
+                            <ul class="flex flex-row  mt-0 mr-6 space-x-8 text-sm font-medium">
+                                <li>
+                                    <Link to="/" class="text-white text-lg  hover:underline" aria-current="page">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/marketPlace" class="text-white text-lg  hover:underline">Market Place</Link>
+                                </li>
+                                <li>
+                                    <Link to="/informationAndLatestNews" class="text-white text-lg  hover:underline">News and Update</Link>
+                                </li>
+                                <li>
+                                    <Link to="/services" class="text-white text-lg  hover:underline">Services</Link>
+                                </li>
+                                <li>
+                                    <Link to="/faq" class="text-white text-lg  hover:underline">FAQ</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
-        </main >
+                :
+                <div>
+                    <nav class="bg-neutral">
+                        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
+                            <a class="flex items-center">
+                                <img src={logo} class="h-6 mr-3 sm:h-9" alt="FCS Logo" />
+                                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FCS</span>
+                            </a>
+                            <div class="flex items-center">
+                                <a href="tel:5541251234" class="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">(555) 412-1234</a>
+                                {!userInfo ? <div>
+
+                                    <Link to="/login" class="text-sm font-medium text-blue-600  hover:underline">Login</Link>
+                                </div> :
+                                    <div class="dropdown dropdown-end">
+                                        <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
+                                            <div class="w-10 rounded-full">
+                                                {userInfo ? <img alt='userImage' src={userInfo.picture} /> : null}
+                                            </div>
+                                        </label>
+                                        {userInfo ? <div>
+                                            <ul tabIndex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-md w-52">
+                                                <li>
+                                                    <Link to='dashboard' className="justify-between">
+                                                        {userInfo.name}
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    {userInfo.isAdmin ? <Link to='F7d32fab841334cdb7b6' className="justify-between">
+                                                        Got to Admin Dashboard
+                                                    </Link> : null}
+                                                </li>
+                                                <li><button onClick={logoutHandler} >Logout</button></li>
+                                            </ul>
+                                        </div> : " "}
+                                    </div>}
+                            </div>
+                        </div>
+                    </nav>
+                    <nav class="bg-primary">
+                        <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
+                            <div class="flex items-center">
+                                <ul class="flex flex-row  mt-0 mr-6 space-x-8 text-sm font-small">
+                                    <li>
+                                        <Link to="/" class="text-white text-sm  hover:underline" aria-current="page">Home</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/marketPlace" class="text-white text-sm  hover:underline">Market Place</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/informationAndLatestNews" class="text-white text-sm  hover:underline">News and Update</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/services" class="text-white text-sm  hover:underline">Services</Link>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>}
+
+        </div>
     );
 };
 

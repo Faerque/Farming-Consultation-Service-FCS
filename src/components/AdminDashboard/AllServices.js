@@ -5,7 +5,7 @@ const AllServices = ({ service }) => {
 
     console.log(service.name, service.description, service._id);
     return (
-        <section>
+        <section >
             <table class="table-auto">
                 <thead>
                     <tr>

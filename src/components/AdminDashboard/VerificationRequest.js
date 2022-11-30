@@ -68,7 +68,7 @@ const VerificationRequest = () => {
     })
 
     return (
-        <section>
+        <section className='mt-8'>
             <div className='flex'>
                 <div className='flex-none'>
                     <AdminSidePanel />

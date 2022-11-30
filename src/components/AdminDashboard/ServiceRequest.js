@@ -45,7 +45,7 @@ const ServiceRequest = () => {
     }
 
     return (
-        <section>
+        <section className='mt-8'>
             <div class="flex">
                 <div class="flex-none">
                     <AdminSidePanel />

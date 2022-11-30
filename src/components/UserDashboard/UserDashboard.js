@@ -89,6 +89,8 @@ const UserDashboard = () => {
         }
     }
 
+
+
     const uploadImage = async (e) => {
         console.log(e.target.files[0]);
         const files = e.target.files;
@@ -105,15 +107,11 @@ const UserDashboard = () => {
         setPictureUploadSuccess(true);
 
     }
-
-
-
-
     return (
-        <div>
+        <div className='mt-8'>
             {
                 loading ? <SpinnerLoading /> : <div className='container mx-auto mt-4'>
-                    <div>
+                    <div className='mt-8' >
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="md:col-span-1">
                                 <div class="px-4 sm:px-0">
@@ -281,7 +279,45 @@ const UserDashboard = () => {
 
                                                                 </div>
                                                                 <div className="collapse-content">
-                                                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                                                    {/* Your Given Consultation Description: {consultation.consultationDescription}
+                                                                    <br />
+                                                                    Consultation Status: {consultation.consultationStatus}
+                                                                    <br />
+                                                                    Consultation Result: {consultation.consultationDescriptionByAdmin} */}
+                                                                    <div className="grid grid-cols-2 gap-6">
+                                                                        <div className='col-span-3 sm:col-span-2'>
+                                                                            <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                                                                                Your Given Consultation Description:
+                                                                            </label>
+                                                                            <div className="mt-1">
+                                                                                <div className="flex items-center mb-3">
+                                                                                    <span className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-orange-200 white:text-orange-900">{consultation.consultationDescription}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='col-span-3 sm:col-span-2'>
+                                                                            <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                                                                                Consultation Status:
+                                                                            </label>
+
+                                                                            <div className="mt-1">
+                                                                                <div className="flex items-center mb-3">
+                                                                                    <span className="bg-yellow-100 text-yellow-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-yellow-200 white:text-yellow-900">{consultation.consultationStatus}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className='col-span-3 sm:col-span-2'>
+                                                                            <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                                                                                Consultation Result:
+                                                                            </label>
+
+                                                                            <div className="mt-1">
+                                                                                <div className="flex items-center mb-3">
+                                                                                    <span className="bg-green-100 text-green-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-green-200 white:text-green-900">{consultation.consultationDescriptionByAdmin}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>)
@@ -289,8 +325,6 @@ const UserDashboard = () => {
                                                 </div>
                                             }
                                         </div>
-
-
                                     </div>
                                 </div>
 

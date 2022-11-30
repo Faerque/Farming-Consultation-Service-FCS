@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SpinnerLoading from '../SpinnerLoading';
 import AdminSidePanel from './AdminSidePanel';
 
@@ -11,8 +11,10 @@ const CheckingForVerifiedUser = () => {
     const [loading, setLoading] = useState(true);
     const [userReq, setUserReq] = useState(null);
     const [users, setUser] = useState([]);
+    const [success, setSuccess] = useState(false);
     const [searchParams] = useSearchParams();
     const id = searchParams.get('id');
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`https://server-fcs.onrender.com/api/userVerificationProcess/checkingVerification/${id}`)
@@ -66,111 +68,101 @@ const CheckingForVerifiedUser = () => {
                 }),
 
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setSuccess(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                        navigate('/userVerificationRequest');
+                    }, 2000);
+                })
         } catch (error) {
             console.log(error);
         }
     };
     return (
-        <main>
+        <main className='mt-8'>
             <div className='flex'>
                 <div className='flex-none'>
                     <AdminSidePanel />
                 </div>
-                <div className='flex-1 w-96'>
-                    <div className='flex'>
-                        <div className="ml-10 mr-10 mt-5">
-                            <div className='container my-14 px-6 mx-auto'>
-                                {loading ? <div className='p-20'>
-                                    <SpinnerLoading />
+                <div className="flex flex-col w-full lg:flex-row">
+                    <div className="grid mb-10 mr-2  bg-base-200 rounded-md place-items-center">
+                        <div className='p-2 '>
+                            <label className="block text-lg font-medium text-gray-900">Requested Information:</label>
+                            <p className="divider lg:divider-vertical"></p>
+                            <div className="flex  flex-col">
+                                <div className="flex  flex-row">
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Name: </label>
+                                        <label className="block text-md font-medium text-gray-700">{userReq?.name}  </label>
+
+                                    </div>
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Email: </label>
+                                        <label className="block text-md font-medium text-gray-700">{userReq?.email}  </label>
+
+                                    </div>
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Phone: </label>
+                                        <label className="block text-md font-medium text-gray-700">+880{userReq?.phone}</label>
+
+                                    </div>
                                 </div>
-                                    : (<section className="border-solid border-2 p-14 rounded-lg border-sky-300  text-gray-800">
-                                        <div className="flex flex-wrap">
-                                            <div className="grow-0 shrink-0 basis-auto md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
-                                                <h2 className="text-3xl font-bold ">
-                                                    User verification Request
-                                                </h2>
-                                                <small className="text-red-500 mb-1">
-                                                    User verification is the most important part of the system. please verify the user carefully.
-                                                </small>
-                                                <br />
-                                                <div className="flex flex-wrap">
-                                                    <div className="grid grid-cols-1 gap-5 flex items-center">
-                                                        <p className="font-bold">Requested User Photo:</p>
-                                                        <div className="mb-3">
-                                                            <img src={userReq.picture} className="max-w-full max-h-60 rounded-lg" alt="" />
-                                                        </div>
-                                                    </div>
-                                                    <div className="grid grid-cols-1 gap-5 flex items-center">
-                                                        <p className="font-bold">Requested User NID:</p>
-                                                        <div className="mb-3">
-                                                            <img alt='user-nid' className="max-w-full h-auto rounded-lg transition-all duration-300 blur-sm hover:blur-none" src={userReq.NID} />
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Age:</label>
+                                        <label className="block text-md font-medium text-gray-700">{userReq?.age}</label>
+                                    </div>
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Gender:</label>
+                                        <label className="block text-md font-medium text-gray-700">{userReq?.gender}</label>
+                                    </div>
+                                </div>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-lg font-medium text-gray-900">Address:</label>
+                                        <label className="block text-md font-medium text-gray-700">{userReq?.address}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex flex-col'>
+                                <div className="flex flex-row">
+                                    <div className="flex flex-col m-2">
+                                        <label className="block text-md font-medium text-gray-900">Requested user Image:</label>
+                                        <img className="aspect-square rounded-sm h-48 w-48" src={userReq?.picture} alt="" />
+                                        <label className="block text-md font-medium text-gray-900">Requested User NID Image:</label>
+                                        <img className="w-full aspect-video rounded-sm h-48 " src={userReq?.NID} alt="" />
+                                    </div>
+                                </div>
+                            </div>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="grow-0 shrink-0 basis-auto mb-12 md:mb-0 w-full md:w-6/12 px-3 lg:px-6">
-                                                <form>
-                                                    <div className="form-group mb-4">
-                                                        <input type="text" className="form-control block
-w-full
-px-3
-py-1.5
-text-base
-font-normal
-text-gray-700
-bg-white bg-clip-padding
-border border-solid border-gray-300
-rounded
-transition
-ease-in-out
-m-0
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput7"
-                                                            placeholder="Name" />
-                                                    </div>
-                                                    <div className="form-group mb-6">
-                                                        <input type="email" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput8"
-                                                            placeholder="Email address" />
-                                                    </div>
-                                                    <label className="mb-0 block text-base font-normal text-gray-700">
-                                                        Upload File
-                                                    </label>
+                        </div>
 
-                                                    <div className="mb-2">
-                                                        <input type="file" name="file" id="file" className="sr-only" />
-                                                        <label
-                                                            for="file"
-                                                            className="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center"
-                                                        >
-                                                            <div>
-                                                                <span className="mb-0 block text-xl font-semibold text-[#07074D]">
-                                                                    Drop files here
-                                                                </span>
-                                                                <span className="mb-0 block text-base font-medium text-[#6B7280]">
-                                                                    Or
-                                                                </span>
-                                                                <span
-                                                                    className="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]"
-                                                                >
-                                                                    Browse
-                                                                </span>
-                                                            </div>
-                                                        </label>
-                                                    </div>
-                                                    <div className="form-group mb-2">
-                                                        <textarea className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
-                                                    </div>
-                                                    <button type="submit" className="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg
-focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-active:bg-blue-800 active:shadow-lg
-transition
-duration-150
-ease-in-out">Send</button>
-                                                </form>
-                                            </div>
+                        <div className='flex flex-row ml-96'>
+                            <div className='flex flex-col p-2 '>
+                                <a href="#my-modal-2" class="btn" className="btn rounded-md btn-primary" >Verify User</a>
+                            </div>
+
+                        </div>
+                        <div class="modal" id="my-modal-2">
+                            <div class="modal-box rounded-md">
+                                {!success ? <div>
+
+                                    <h3 class="font-bold text-lg">Are you sure want to verify the user?</h3>
+                                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                                    <div class="modal-action">
+                                        <a onClick={handleVerifyUser} class="btn">Yes</a>
+                                        <a href='#' class="btn">Not Now</a>
+                                    </div>
+                                </div> :
+                                    <div className="alert alert-success rounded-md">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                            <span>User Verified Successfully!</span>
                                         </div>
-                                        <button className='btn btn-primary' onClick={handleVerifyUser}> Verifed</button>
-                                    </section>)}
+                                    </div>}
                             </div>
                         </div>
                     </div>

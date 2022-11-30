@@ -8,7 +8,12 @@ const Articles = () => {
             <div class="container my-18 px-6 mx-auto">
                 <section class="mb-32 text-gray-800 text-center md:text-left">
 
-                    <h2 class="text-3xl font-bold mb-12 text-center">Latest articles</h2>
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                        <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200">
+                            <h2 class="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">News and update</h2>
+                            <p class="mt-4 text-center text-xl text-gray-500">Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.</p>
+                        </div>
+                    </div>
 
                     <div class="flex flex-wrap mb-6">
                         <div class="grow-0 shrink-0 basis-auto w-full md:w-3/12 px-3 mb-6 md:mb-0 ml-auto">

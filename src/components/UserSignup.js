@@ -6,6 +6,7 @@ import UserAvatar from '../assets/UserAvatar.svg';
 import ErrorMessage from './ErrorMessage';
 import FooterSm from './Footer/FooterSm'
 import Loading from './Loading';
+import Logo from '../assets/Logo.png';
 
 const UserSignup = () => {
 
@@ -74,7 +75,7 @@ const UserSignup = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img className="mx-auto h-12 w-auto" src={UserAvatar} alt="Your Company" />
+                        <img className="mx-auto h-20 w-auto" src={Logo} alt="FCS" />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">Have an account ?</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             <Link to="/login" className="font-medium text-2xl text-primary-focus hover:text-primary">Sign in now</Link>
@@ -132,16 +133,15 @@ const UserSignup = () => {
                         }
                         <div className='place-content-center' >
                             <button type="submit" className="flex w-full justify-center btn btn-outline btn-success">
-                                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                </span>
+
                                 Sign Up
                             </button>
                         </div>
                     </form>
                 </div>
-            </div >
-            <FooterSm></FooterSm>
-        </section >
+            </div>
+
+        </section>
     );
 };
 

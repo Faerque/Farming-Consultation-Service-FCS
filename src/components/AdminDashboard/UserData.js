@@ -5,7 +5,7 @@ import AdminSidePanel from './AdminSidePanel';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SpinnerLoading from '../SpinnerLoading';
-
+import dateFormat from "dateformat";
 
 const UserData = () => {
     const [users, setUser] = useState([]);
@@ -42,7 +42,7 @@ const UserData = () => {
 
 
     return (
-        <main>
+        <main className='mt-8'>
             <div class="flex">
                 <div class="flex-none">
                     <AdminSidePanel />
@@ -98,7 +98,8 @@ const UserData = () => {
                                                                         {user.isVerified ? <td className='text-green-600'>Verified</td> : <td className='text-red-600'>Not Verified</td>}
                                                                         {user.isAdmin ? <td className='text-green-500'>Admin</td> : <td>Not Admin</td>}
 
-                                                                        <td>{user.created_at}</td>
+                                                                        <td>{dateFormat(user.created_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
+
                                                                     </tr>)}
                                                         </tbody>
                                                     </table>

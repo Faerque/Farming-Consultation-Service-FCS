@@ -47,7 +47,7 @@ const AddService = () => {
 
 
     return (
-        <div className='flex'>
+        <div className='flex mt-8'>
             <div className='flex-none'>
                 <AdminSidePanel />
             </div>
