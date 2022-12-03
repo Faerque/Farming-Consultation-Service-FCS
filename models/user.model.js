@@ -31,7 +31,7 @@ const userSchema = mongoose.Schema({
     picture: {
         type: String,
         required: true,
-        default: "https://icons8.com/icon/tHU2fx7jAMrR/user-avatar",
+        default: "https://img.icons8.com/external-smashingstocks-isometric-smashing-stocks/55/null/external-user-avatar-social-media-smashingstocks-isometric-smashing-stocks-2.png",
     },
     NID: {
         type: String,
