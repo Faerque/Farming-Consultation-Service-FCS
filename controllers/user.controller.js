@@ -65,11 +65,12 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // all user data    
 const allUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({});
+    // don't want to send password to user so we use select('-password')
+    const users = await User.find({}).select('-password');
     res.json(users);
 });
 
-// user information update by id
+// user information update to verified by id
 const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -103,4 +104,31 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { userReg, loginUser, allUsers, updateUser };
+// user general information update by id
+const updateGeneralUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.picture = req.body.picture || user.picture;
+        user.phone = req.body.phone || user.phone;
+        user.age = req.body.age || user.age;
+        user.gender = req.body.gender || user.gender;
+        user.address = req.body.address || user.address;
+        user.picture = req.body.picture || user.picture;
+        const updatedGnUser = await user.save();
+        res.json({
+            name: updatedGnUser.name,
+            picture: updatedGnUser.picture,
+            phone: updatedGnUser.phone,
+            age: updatedGnUser.age,
+            gender: updatedGnUser.gender,
+            address: updatedGnUser.address,
+        });
+    }
+    else {
+        res.status(404);
+        throw new Error("User not found");
+    }
+});
+
+module.exports = { userReg, loginUser, allUsers, updateUser, updateGeneralUser };

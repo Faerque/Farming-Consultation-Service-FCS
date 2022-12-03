@@ -38,6 +38,10 @@ const userConsultationSchema = mongoose.Schema({
         // required: true,
         default: 'pending',
     },
+    consultationDescriptionByAdmin: {
+        type: String,
+        default: ''
+    }
 });
 
 // making a collection of consultation taken by user

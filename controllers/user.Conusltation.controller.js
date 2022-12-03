@@ -4,7 +4,14 @@ const asyncHandler = require('express-async-handler');
 // here we will create a function to take a consultation from user
 
 const createConsultation = asyncHandler(async (req, res) => {
-    const { userName, userEmail, consultationName, userPhone, consultationImgUrl, consultationDescription, consultationStatus } = req.body;
+    const { userName,
+        userEmail,
+        consultationName,
+        userPhone,
+        consultationImgUrl,
+        consultationDescription,
+        consultationDescriptionByAdmin,
+        consultationStatus } = req.body;
 
     // needs to added a function that a user cant take a consultation more than one time
 
@@ -17,6 +24,8 @@ const createConsultation = asyncHandler(async (req, res) => {
         consultationImgUrl,
         consultationDescription,
         consultationStatus,
+        consultationDescriptionByAdmin
+
     });
     // here we check if consultation is created or not
     if (consultation) {
@@ -29,6 +38,7 @@ const createConsultation = asyncHandler(async (req, res) => {
             consultationImgUrl: consultation.consultationImgUrl,
             consultationDescription: consultation.consultationDescription,
             consultationStatus: consultation.consultationStatus,
+            consultationDescriptionByAdmin: consultation.consultationDescriptionByAdmin
         });
     } else {
         res.status(400);
@@ -42,4 +52,29 @@ const getAllConsultation = asyncHandler(async (req, res) => {
     res.json(consultation);
 });
 
-module.exports = { createConsultation, getAllConsultation };
+// here we will get a consultation to update consultation description and status
+
+const updateConsultationDescription = asyncHandler(async (req, res) => {
+    const { consultationDescriptionByAdmin, consultationStatus } = req.body;
+    const consultation = await UserConsultation.findById(req.params.id);
+    if (consultation) {
+        consultation.consultationDescriptionByAdmin = consultationDescriptionByAdmin;
+        consultation.consultationStatus = consultationStatus;
+        const updatedConsultation = await consultation.save();
+        res.json({
+            _id: updatedConsultation._id,
+            userName: updatedConsultation.userName,
+            userEmail: updatedConsultation.userEmail,
+            userPhone: updatedConsultation.userPhone,
+            consultationName: updatedConsultation.consultationName,
+            consultationImgUrl: updatedConsultation.consultationImgUrl,
+            consultationDescriptionByAdmin: updatedConsultation.consultationDescriptionByAdmin,
+            consultationStatus: updatedConsultation.consultationStatus,
+        });
+    } else {
+        res.status(404);
+        throw new Error("Consultation not found");
+    }
+});
+
+module.exports = { createConsultation, getAllConsultation, updateConsultationDescription };
