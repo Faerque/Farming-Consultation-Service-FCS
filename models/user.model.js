@@ -31,12 +31,10 @@ const userSchema = mongoose.Schema({
     picture: {
         type: String,
         required: true,
-        default: " ",
+        default: "https://icons8.com/icon/tHU2fx7jAMrR/user-avatar",
     },
     NID: {
         type: String,
-
-
     },
     phone: {
         type: String,
