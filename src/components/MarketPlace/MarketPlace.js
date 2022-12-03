@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RightArrow from '../../assets/right-arrow.svg';
 import FooterMain from '../Footer/FooterMain';
+import FooterSm from '../Footer/FooterSm';
 const MarketPlace = () => {
     const [searchResult, setSearchResult] = useState("all");
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -143,6 +144,7 @@ const MarketPlace = () => {
                 </div>
             </div>
             <FooterMain />
+            <FooterSm />
         </main>
     );
 };

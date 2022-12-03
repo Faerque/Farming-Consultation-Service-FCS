@@ -22,6 +22,7 @@ import VerificationRequest from "./components/AdminDashboard/VerificationRequest
 import CheckingForVerifiedUser from "./components/AdminDashboard/CheckingForVerifiedUser";
 import Articles from "./components/Articles/Articles";
 import Faq from "./components/Faq";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 
 export const UserContext = createContext();
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/mobileDetected" element={<MobileAdminWarning />} />
           <Route path="/informationAndLatestNews" element={<Articles />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/*" element={<PrivateChecking />}>
             <Route path="dashboard" element={<UserDashboard />} />
             <Route path="F7d32fab841334cdb7b6" element={<AdminDashboard />} />

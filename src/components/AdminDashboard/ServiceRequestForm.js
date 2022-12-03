@@ -42,7 +42,7 @@ const ServiceRequestForm = ({ modalData, modalIsOpen, closeModal }) => {
             consultationStatus: "Done"
         }
         try {
-            await fetch(`http://localhost:5000/api/userConsultation/updateConsultation/${modalData._id}`, {
+            await fetch(`https://server-fcs.onrender.com/api/userConsultation/updateConsultation/${modalData._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

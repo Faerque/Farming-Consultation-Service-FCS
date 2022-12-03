@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import SpinnerLoading from '../SpinnerLoading';
 import Service from './Service';
 import FooterMain from '../Footer/FooterMain';
+import FooterSm from '../Footer/FooterSm';
 
 const Services = () => {
 
@@ -58,6 +59,7 @@ const Services = () => {
                 position: "absolute", width: "100%"
             }}>
                 <FooterMain />
+                <FooterSm />
             </div>
         </div>
     );

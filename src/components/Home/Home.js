@@ -1,5 +1,6 @@
 import React from 'react';
 import FooterMain from '../Footer/FooterMain';
+import FooterSm from '../Footer/FooterSm';
 
 import Feature from './Feature';
 import Header from './Header';
@@ -15,6 +16,7 @@ const Home = () => {
                 <Feature />
                 <Testimonials />
                 <FooterMain />
+                <FooterSm />
             </div>
         </>
     );

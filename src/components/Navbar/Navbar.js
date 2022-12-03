@@ -43,7 +43,7 @@ const Navbar = () => {
                                 <div class="dropdown dropdown-end">
                                     <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
                                         <div class="w-10 rounded-full">
-                                            {userInfo ? <img alt='userImage' src={userInfo.picture} /> : null}
+                                            {userInfo.picture ? <img alt='userImage' src={userInfo.picture} /> : null}
                                         </div>
                                     </label>
                                     {userInfo ? <div>

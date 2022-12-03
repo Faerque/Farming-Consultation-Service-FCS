@@ -1,5 +1,6 @@
 import React from 'react';
 import FooterMain from '../Footer/FooterMain';
+import FooterSm from '../Footer/FooterSm';
 
 const Articles = () => {
     return (
@@ -110,6 +111,7 @@ const Articles = () => {
                 </section>
             </div>
             <FooterMain />
+            <FooterSm />
         </div>
     );
 };

@@ -5,6 +5,7 @@ import FooterMain from '../Footer/FooterMain';
 import dateFormat from "dateformat";
 import { Link } from 'react-router-dom';
 import SpinnerLoading from '../SpinnerLoading';
+import FooterSm from '../Footer/FooterSm';
 const UserDashboard = () => {
     const [allUserData, setAllUserData] = useState([]);
     const [consultationData, setConsultationData] = useState([]);
@@ -18,35 +19,43 @@ const UserDashboard = () => {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [updateError, setUpdateError] = useState(false);
     const [pictureUploadSuccess, setPictureUploadSuccess] = useState(false);
+    const [verificationPending, setVerificationPending] = useState([]);
 
     // taking data from local storage
     const user = JSON.parse(localStorage.getItem('userInfo'));
     // using useEffect to get few more data for logged in user
-    useEffect(() => {
-        axios.get('https://server-fcs.onrender.com/api/users/allUsers')
+    useEffect(() => async () => {
+        await axios.get('https://server-fcs.onrender.com/api/users/allUsers')
             .then(res => {
                 setAllUserData(res.data);
                 setLoading(false);
             })
             .catch(error => console.log(error));
         // service used by user
-        axios.get('https://server-fcs.onrender.com/api/userConsultation/consultations')
+        await axios.get('https://server-fcs.onrender.com/api/userConsultation/consultations')
             .then(res => {
                 setConsultationData(res.data);
             })
             .catch(error => console.log(error));
 
+        await axios.get('https://server-fcs.onrender.com/api/userVerificationProcess/')
+            .then(res => {
+                setVerificationPending(res.data);
+            })
     }, []);
-
     // only data will be shown who is logged in
     const filterUser = allUserData.filter(data => data.email === user.email);
     console.log(filterUser[0]);
-    const { _id, name, email, phone, address, isVerified, isAdmin, picture, gender, created_at, age, token } = filterUser[0] || {};
+    const { _id, name, email, phone, address, isVerified, isAdmin, picture, gender, created_at, age, token } = filterUser[0] || [];
     // filter consultation data by logged in user
     const filterConsultation = consultationData.filter(data => data.userEmail === user.email);
     console.log(filterConsultation);
+    // filter verification data by logged in user
+    const filterVerification = verificationPending.filter(data => data.email === user.email && filterUser[0].isVerified === false) || [];
+    console.log(filterVerification[0]);
 
     // update user data function
+    console.log(verificationPending);
     const handleUpdate = async (e) => {
         e.preventDefault();
         const updatedUser = {
@@ -64,7 +73,7 @@ const UserDashboard = () => {
         }
         console.log(updatedUser);
         try {
-            await fetch(`http://localhost:5000/api/users/updateGeneralUser/${_id}`, {
+            await fetch(`https://server-fcs.onrender.com/api/users/updateGeneralUser/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -120,13 +129,19 @@ const UserDashboard = () => {
                                     {isVerified ? <div class="bg-blue-100 rounded-sm py-5 px-6 mb-4 text-base text-blue-600 mb-3" role="alert">
                                         User is verified to the system. Can't change user information.
                                     </div> :
-                                        <div class="bg-yellow-100 rounded-sm py-5 px-6 mb-4 text-base text-yellow-600 mb-3" role="alert">
-                                            User is not verified to the system. Can change user information.
-                                            To verify, please click on verify button.
-                                            <div className='mt-2'>
-                                                <Link to="/VerificationProcess" className="btn btn-outline btn-primary">verify now </Link>
+                                        <div>
+                                            {filterVerification[0] ? <div class="bg-green-100 rounded-sm py-5 px-6 mb-4 text-base text-green-600 mb-3" role="alert">
+                                                Verification is pending. Please wait for the admin to verify you.
+                                            </div> : <div class="bg-yellow-100 rounded-sm py-5 px-6 mb-4 text-base text-yellow-600 mb-3" role="alert">
+                                                User is not verified to the system. Can change user information.
+                                                To verify, please click on verify button.
+                                                <div className='mt-2'>
+                                                    <Link to="/VerificationProcess" className="btn btn-outline btn-primary">verify now </Link>
+                                                </div>
                                             </div>
+                                            }
                                         </div>}
+
                                 </div>
                             </div>
                             <div class="mt-5 md:col-span-2 md:mt-0">
@@ -167,7 +182,7 @@ const UserDashboard = () => {
 
                                                 <div class="col-span-3 sm:col-span-2">
                                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
-                                                    {isVerified ? <label htmlFor="email" class="mt-1 text-sm text-gray-700">{email}</label> : <input type="text" placeholder={user.email} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" disabled />}
+                                                    {isVerified ? <label htmlFor="email" class="mt-1 text-sm text-gray-700">{email}</label> : <input type="text" placeholder={user.email} class="mt-1 cursor-not-allowed focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" disabled />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
                                                     <label for="email-address" class="block text-sm font-medium text-gray-700">Gender</label>
@@ -419,6 +434,7 @@ const UserDashboard = () => {
             }
             <div className='mt-7' >
                 <FooterMain />
+                <FooterSm />
             </div>
         </div>
     );
