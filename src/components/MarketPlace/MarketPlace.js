@@ -61,7 +61,7 @@ const MarketPlace = () => {
                         <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                             {
                                 data.filter((data) => filterSearch(data))
-                                    .map(data => <Product key={data.id} data={data} ></Product>)
+                                    .map(data => <Product key={data.id} isVerified={isVerified} data={data} ></Product>)
                             }
                         </div>
                     </div>

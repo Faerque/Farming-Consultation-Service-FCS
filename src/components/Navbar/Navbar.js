@@ -30,7 +30,7 @@ const Navbar = () => {
                     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
                         <a href="https://flowbite.com" class="flex items-center">
                             <img src={logo} class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
-                            <label class="self-center text-xl font-semibold whitespace-nowrap text-white">Farming Consultation Services</label>
+                            <label class="self-center text-xl font-semibold whitespace-nowrap text-white"> কৃষি বিষয়ক পরামর্শ সেবা </label>
                         </a>
                         <div>
                         </div>

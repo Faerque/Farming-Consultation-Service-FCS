@@ -104,18 +104,15 @@ const VerificationProcess = () => {
                 <section class="rounded-md border-green-300  text-gray-800">
                     <div class="flex flex-wrap">
                         <div class="grow-0 shrink-0 mt-0 mb-0  md:mb-0 w-full md:w-6/12 px-3 ">
-                            <h2 class="text-3xl font-bold mb-3">User Verification Process</h2>
+                            <h2 class="text-3xl font-bold mb-3">ব্যবহারকারী যাচাইকরণ প্রক্রিয়া</h2>
                             <div className="divider"></div>
                             <p class="text-gray-500 mb-3">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                Laudantium, modi accusantium ipsum corporis quia asperiores
-                                dolorem nisi corrupti eveniet dolores ad maiores repellendus enim
-                                autem omnis fugiat perspiciatis? Ad, veritatis.
+                                আপনার সঠিক তথ্য দিন এবং আপনার প্রদত্ত তথ্য যাচাই করা হবে। আপনার তথ্য যাচাই করার পর আপনার অ্যাকাউন্ট দ্বারা  কৃষি বিষয়ক পরামর্শ সেবা এর বিভিন্ন সেবা গ্রহণকরতে পারবেন।
                             </p>
                             <div class="subpixel-antialiased">
                                 <form onSubmit={submitHandler}>
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="name">Enter Full Name</label>
+                                        <label class="font-medium text-gray-900" htmlFor="name">আপনার পুরো নাম দিনঃ</label>
                                         <input type="text" class="form-control block
               w-full
               px-3
@@ -136,9 +133,9 @@ const VerificationProcess = () => {
                                         />
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="email">Your Email Address </label>
+                                        <label class="font-medium text-gray-900" htmlFor="email">আপনার ইমেইলঃ</label>
                                         <br />
-                                        <span className='text-xs text-red-500'>*Email Address Can't be change</span>
+                                        <span className='text-xs text-red-500'>*ইমেইল অপরিবর্তনযোগ্য</span>
                                         <input disabled type="email " class="disabled form-control block
               w-full
               px-3
@@ -158,7 +155,7 @@ const VerificationProcess = () => {
                                         />
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="number">Enter your phone number</label>
+                                        <label class="font-medium text-gray-900" htmlFor="number">আপনার ফোন নাম্বার দিনঃ</label>
                                         <input type="tel" class="form-control block
               w-full
               px-3
@@ -182,7 +179,7 @@ const VerificationProcess = () => {
 
 
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="text">Enter Gender</label>
+                                        <label class="font-medium text-gray-900" htmlFor="text">লিঙ্গঃ</label>
                                         <input type="text" class="form-control block
               w-full
               px-3
@@ -203,7 +200,7 @@ const VerificationProcess = () => {
                                         />
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="age">Enter Age</label>
+                                        <label class="font-medium text-gray-900" htmlFor="age">আপনার বয়সঃ</label>
                                         <input type="number" class="form-control block
               w-full
               px-3
@@ -224,7 +221,7 @@ const VerificationProcess = () => {
                                         />
                                     </div>
                                     <div class="form-group mb-2">
-                                        <label class="font-medium text-gray-900" htmlFor="address">Enter Full Address</label>
+                                        <label class="font-medium text-gray-900" htmlFor="address">আপনার ঠিকানাঃ</label>
                                         <input type="address" class="form-control block
               w-full
               px-3
@@ -247,24 +244,24 @@ const VerificationProcess = () => {
 
                                     <div class="mb-2">
                                         <label class="font-medium text-gray-900">
-                                            Upload your Passport Size Photo
+                                            আপনার একটি পাসপোর্ট সাইজ ছবি আপলোড করুনঃ
                                         </label>
 
                                         <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-sm border  cursor-pointer" aria-describedby="file_input_help" id="file_input" type="file"
                                             onChange={uploadImage}
                                         />
-                                        {pictureUploadSuccess ? <p className="text-green-500">Image Uploaded Successfully</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG </p>}
+                                        {pictureUploadSuccess ? <p className="text-green-500">ছবি সফলভাবে আপলোড করা হয়েছে</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG </p>}
 
                                     </div>
                                     <div class="mb-2">
                                         <label class="font-medium text-gray-900">
-                                            Upload Your National ID card
+                                            আপনার জাতীয় পরিচয়পত্রের একটি ছবি দিনঃ
                                         </label>
 
                                         <input class="block w-full text-sm text-gray-900 bg-gray-50 rounded-sm border  cursor-pointer" aria-describedby="file_input_help" id="file_input" type="file"
                                             onChange={uploadNID}
                                         />
-                                        {nidUploadSuccess ? <p class="mt-1  text-green-500" id="file_input_help">Nid upload successfully</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG</p>}
+                                        {nidUploadSuccess ? <p class="mt-1  text-green-500" id="file_input_help">এনআইডি ছবি সফলভাবে আপলোড করা হয়েছে</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG</p>}
 
                                     </div>
                                     {loading && <div className='w-full'>
@@ -273,7 +270,7 @@ const VerificationProcess = () => {
                                     {success && <div class="alert alert-success shadow-lg">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                            <span>Verification Request has been sent!</span>
+                                            <span>যাচাইকরণের অনুরোধ পাঠানো হয়েছে!</span>
                                         </div>
                                     </div>}
                                     {error && <div class="alert alert-error shadow-lg">
@@ -284,7 +281,7 @@ const VerificationProcess = () => {
                                     </div>}
                                     <div className='place-content-center' >
                                         <button disabled={buttonDisabled} type="submit" className="w-full justify-center rounded-md btn btn-outline btn-success">
-                                            Send Request
+                                            তথ্যগুলো পাঠিয়ে দিন এবং যাচাইকরণের অনুরোধ করুন
                                         </button>
                                     </div>
                                 </form>
@@ -299,7 +296,9 @@ const VerificationProcess = () => {
                                     কেমন নাম গ্রহণযোগ্য?
                                 </div>
                                 <div className="collapse-content">
-                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                    <p>
+                                        আপনার দেওয়া নাম অবশ্যই আপনার দেওয়া জাতীয়পরিচয় পত্রের সাথে মিল থাকতে হবে। অন্যথায় আপনার অনুরোধটি অগ্রাহ্য হবে।
+                                    </p>
                                 </div>
                             </div>
                             <div tabIndex={0} className="collapse mb-1 collapse-plus border border-base-200 bg-base-100 rounded-md">
@@ -307,7 +306,9 @@ const VerificationProcess = () => {
                                     ইমেইল এড্রেস পরিবর্তন করা যায় না কেন?
                                 </div>
                                 <div className="collapse-content">
-                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                    <p>
+                                        কৃষি বিষয়ক পরামর্শ সেবা এর নিয়মমতে আপনার ইমেইল এড্রেসটি একজন ব্যাক্তির জন্যে নির্ধারিত এবং পরিবর্তন করা যাবে না।
+                                    </p>
                                 </div>
                             </div>
                             <div tabIndex={0} className="collapse mb-1 collapse-plus border border-base-200 bg-base-100 rounded-md">
@@ -315,7 +316,9 @@ const VerificationProcess = () => {
                                     ভেরিফিকেশন রিকুয়েস্ট দেওয়ার কতদিন পর উত্তর পাওয়া যায়?
                                 </div>
                                 <div className="collapse-content">
-                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                    <p>
+                                        ৩-৭দিনের মধ্যে ব্যাক্তির তথ্য যাচাইকরা হবে এবং উত্তর পাওয়া যাবে।
+                                    </p>
                                 </div>
                             </div>
                             <div tabIndex={0} className="collapse mb-1 collapse-plus border border-base-200 bg-base-100 rounded-md">
@@ -323,7 +326,7 @@ const VerificationProcess = () => {
                                     কোনো উত্তর ভুল দিলে বা ভুল ফিলআপ করলে কি হবে?
                                 </div>
                                 <div className="collapse-content">
-                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                    <p>আপনার তথ্য যাচাইকরণের অনুরোধটি বাতিল বলে গণ্য হবে।</p>
                                 </div>
                             </div>
                             <div tabIndex={0} className="collapse mb-1 collapse-plus border border-base-200 bg-base-100 rounded-md">
@@ -331,7 +334,9 @@ const VerificationProcess = () => {
                                     জাতীয় পরিচয় পত্রের ছবি কেন নেওয়া হচ্ছে ?
                                 </div>
                                 <div className="collapse-content">
-                                    <p>tabIndex={0} attribute is necessary to make the div focusable</p>
+                                    <p>
+                                        বাংলাদেশের সংবিধান মতে একজন বাঙ্গালীর পরিচয় সনাক্তে তার জাতীয়পরিচয় প্রথম এবং বৈধ পত্র, তাই আপনার পরিচয় যাচাইয়ে জাতীয় পরিচয় পত্রের ছবি নেওয়া হচ্ছে।
+                                    </p>
                                 </div>
                             </div>
 
