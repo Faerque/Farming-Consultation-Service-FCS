@@ -23,6 +23,9 @@ import CheckingForVerifiedUser from "./components/AdminDashboard/CheckingForVeri
 import Articles from "./components/Articles/Articles";
 import Faq from "./components/Faq";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import RedRustRog from "./components/Articles/RedRustRog";
+import PataMoranuRog from "./components/Articles/PataMoranuRog";
+import BlastRog from "./components/Articles/BlastRog";
 
 export const UserContext = createContext();
 
@@ -44,6 +47,9 @@ function App() {
           <Route path="/informationAndLatestNews" element={<Articles />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/redRustRog" element={<RedRustRog />} />
+          <Route path="/pataMoranuRog" element={<PataMoranuRog />} />
+          <Route path="/blastRog" element={<BlastRog />} />
           <Route path="/*" element={<PrivateChecking />}>
             <Route path="dashboard" element={<UserDashboard />} />
             <Route path="F7d32fab841334cdb7b6" element={<AdminDashboard />} />

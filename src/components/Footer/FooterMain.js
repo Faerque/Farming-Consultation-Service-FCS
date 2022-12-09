@@ -7,7 +7,7 @@ const FooterMain = () => {
 
         <footer className="place-items-center bg-primary footer p-10 bg-base-200 text-base-content">
             <div>
-                <span className="footer-title text-white">সেবা সমূহঃ</span>
+                <span className="footer-title text-white">সেবা সমূহ</span>
                 <Link to='/marketplace' className="text-white link link-hover">বেচা কেনা</Link>
                 <Link to='/services' className="text-white link link-hover">পরামর্শ নিন</Link>
                 <Link to='/informationAndLatestNews' className="text-white link link-hover">জানুন এবং শিখুন</Link>

@@ -38,7 +38,7 @@ const Navbar = () => {
                             <a href="tel:5541251234" class="mr-6 text-lg font-medium text-gray-500 text-white hover:underline">(555) 412-1234</a>
                             {!userInfo ? <div>
 
-                                <Link to="/login" class="text-xl font-medium text-blue-600  hover:underline">Login</Link>
+                                <Link to="/login" class="text-xl font-medium text-blue-600  hover:underline">লগইন</Link>
                             </div> :
                                 <div class="dropdown dropdown-end">
                                     <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
@@ -58,7 +58,7 @@ const Navbar = () => {
                                                     Got to Admin Dashboard
                                                 </Link> : null}
                                             </li>
-                                            <li><button onClick={logoutHandler} >Logout</button></li>
+                                            <li><button onClick={logoutHandler} >লগআউট</button></li>
                                         </ul>
                                     </div> : " "}
                                 </div>}
@@ -70,19 +70,21 @@ const Navbar = () => {
                         <div class="flex items-center">
                             <ul class="flex flex-row  mt-0 mr-6 space-x-8 text-sm font-medium">
                                 <li>
-                                    <Link to="/" class="text-white text-lg  hover:underline" aria-current="page">Home</Link>
+                                    <Link to="/" class="text-white text-lg  hover:underline" aria-current="page">হোম</Link>
                                 </li>
                                 <li>
-                                    <Link to="/marketPlace" class="text-white text-lg  hover:underline">Market Place</Link>
+                                    <Link to="/marketPlace" class="text-white text-lg  hover:underline">বেচা কেনা</Link>
                                 </li>
                                 <li>
-                                    <Link to="/informationAndLatestNews" class="text-white text-lg  hover:underline">News and Update</Link>
+                                    <Link to="/informationAndLatestNews" class="text-white text-lg  hover:underline">জানুন এবং শিখুন</Link>
                                 </li>
                                 <li>
-                                    <Link to="/services" class="text-white text-lg  hover:underline">Services</Link>
+                                    <Link to="/services" class="text-white text-lg  hover:underline">পরামর্শ নিন</Link>
                                 </li>
                                 <li>
-                                    <Link to="/faq" class="text-white text-lg  hover:underline">FAQ</Link>
+                                    <Link to="/faq" class="text-white text-lg  hover:underline">
+                                        সচরাচর প্রশ্ন
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -93,15 +95,14 @@ const Navbar = () => {
                 <div>
                     <nav class="bg-neutral">
                         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-                            <a class="flex items-center">
+                            <p class="flex items-center">
                                 <img src={logo} class="h-6 mr-3 sm:h-9" alt="FCS Logo" />
-                                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">FCS</span>
-                            </a>
+                            </p>
                             <div class="flex items-center">
-                                <a href="tel:5541251234" class="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">(555) 412-1234</a>
+                                <a href="tel:5541251234" class="mr-6 text-sm font-medium text-white hover:underline">(555) 412-1234</a>
                                 {!userInfo ? <div>
 
-                                    <Link to="/login" class="text-sm font-medium text-blue-600  hover:underline">Login</Link>
+                                    <Link to="/login" class="text-sm font-medium text-blue-600  hover:underline">লগইন</Link>
                                 </div> :
                                     <div class="dropdown dropdown-end">
                                         <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
@@ -121,7 +122,7 @@ const Navbar = () => {
                                                         Got to Admin Dashboard
                                                     </Link> : null}
                                                 </li>
-                                                <li><button onClick={logoutHandler} >Logout</button></li>
+                                                <li><button onClick={logoutHandler} >লগআউট</button></li>
                                             </ul>
                                         </div> : " "}
                                     </div>}
@@ -133,16 +134,16 @@ const Navbar = () => {
                             <div class="flex items-center">
                                 <ul class="flex flex-row  mt-0 mr-6 space-x-8 text-sm font-small">
                                     <li>
-                                        <Link to="/" class="text-white text-sm  hover:underline" aria-current="page">Home</Link>
+                                        <Link to="/" class="text-white text-sm  hover:underline" aria-current="page">হোম</Link>
                                     </li>
                                     <li>
-                                        <Link to="/marketPlace" class="text-white text-sm  hover:underline">Market Place</Link>
+                                        <Link to="/marketPlace" class="text-white text-sm  hover:underline">বেচা কেনা</Link>
                                     </li>
                                     <li>
-                                        <Link to="/informationAndLatestNews" class="text-white text-sm  hover:underline">News and Update</Link>
+                                        <Link to="/informationAndLatestNews" class="text-white text-sm  hover:underline">জানুন এবং শিখুন</Link>
                                     </li>
                                     <li>
-                                        <Link to="/services" class="text-white text-sm  hover:underline">Services</Link>
+                                        <Link to="/services" class="text-white text-sm  hover:underline">পরামর্শ নিন</Link>
                                     </li>
 
                                 </ul>

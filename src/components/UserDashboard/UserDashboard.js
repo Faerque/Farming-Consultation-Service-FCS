@@ -6,6 +6,8 @@ import dateFormat from "dateformat";
 import { Link } from 'react-router-dom';
 import SpinnerLoading from '../SpinnerLoading';
 import FooterSm from '../Footer/FooterSm';
+import toast, { Toaster } from 'react-hot-toast';
+
 const UserDashboard = () => {
     const [allUserData, setAllUserData] = useState([]);
     const [consultationData, setConsultationData] = useState([]);
@@ -16,33 +18,38 @@ const UserDashboard = () => {
     const [updatedGender, setUpdatedGender] = useState('');
     const [updatedAge, setUpdatedAge] = useState('');
     const [updatedPicture, setUpdatedPicture] = useState('');
-    const [updateSuccess, setUpdateSuccess] = useState(false);
-    const [updateError, setUpdateError] = useState(false);
     const [pictureUploadSuccess, setPictureUploadSuccess] = useState(false);
     const [verificationPending, setVerificationPending] = useState([]);
+    const [nothingToChange, setNothingToChange] = useState(false);
 
     // taking data from local storage
     const user = JSON.parse(localStorage.getItem('userInfo'));
     // using useEffect to get few more data for logged in user
-    useEffect(() => async () => {
-        await axios.get('https://server-fcs.onrender.com/api/users/allUsers')
-            .then(res => {
-                setAllUserData(res.data);
-                setLoading(false);
-            })
-            .catch(error => console.log(error));
-        // service used by user
-        await axios.get('https://server-fcs.onrender.com/api/userConsultation/consultations')
-            .then(res => {
-                setConsultationData(res.data);
-            })
-            .catch(error => console.log(error));
+    useEffect(() => {
+        const fetchData = async () => {
+            await axios.get('https://server-fcs.onrender.com/api/users/allUsers')
+                .then(res => {
+                    setAllUserData(res.data);
+                    setLoading(false);
+                })
+                .catch(error => console.log(error));
+            // service used by user
+            await axios.get('https://server-fcs.onrender.com/api/userConsultation/consultations')
+                .then(res => {
+                    setConsultationData(res.data);
+                })
+                .catch(error => console.log(error));
 
-        await axios.get('https://server-fcs.onrender.com/api/userVerificationProcess/')
-            .then(res => {
-                setVerificationPending(res.data);
-            })
+            await axios.get('https://server-fcs.onrender.com/api/userVerificationProcess/')
+                .then(res => {
+                    setVerificationPending(res.data);
+                }).catch(error => console.log(error));
+        };
+        fetchData();
+
     }, []);
+
+
     // only data will be shown who is logged in
     const filterUser = allUserData.filter(data => data.email === user.email);
     console.log(filterUser[0]);
@@ -58,46 +65,48 @@ const UserDashboard = () => {
     console.log(verificationPending);
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const updatedUser = {
-            _id: _id,
-            name: updatedName || name,
-            phone: updatedPhone || phone,
-            address: updatedAddress || address,
-            age: updatedAge || age,
-            gender: updatedGender || gender,
-            picture: updatedPicture || picture,
-            email: email,
-            isVerified: isVerified,
-            isAdmin: isAdmin,
-            token: token,
-        }
-        console.log(updatedUser);
-        try {
-            await fetch(`https://server-fcs.onrender.com/api/users/updateGeneralUser/${_id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedUser)
-            }).then(res =>
-                res.json())
-                .then(data => {
-                    if (data) {
-                        setUpdateSuccess(true);
-                        // localStorage.setItem('userInfo', JSON.stringify(data));
-                        console.log(data);
-                    }
-
-                })
-            setUpdateSuccess(true);
-            // will store data in local storage
-
-        } catch (error) {
-            setUpdateError(true);
-            console.log(error);
+        if (updatedName === '' && updatedPhone === '' && updatedAddress === '' && updatedGender === '' && updatedAge === '' && updatedPicture === '') {
+            toast.error('নতুন কোনো তথ্য নেই!');
+        } else {
+            const updatedUser = {
+                _id: _id,
+                name: updatedName || name,
+                phone: updatedPhone || phone,
+                address: updatedAddress || address,
+                age: updatedAge || age,
+                gender: updatedGender || gender,
+                picture: updatedPicture || picture,
+                email: email,
+                isVerified: isVerified,
+                isAdmin: isAdmin,
+                token: token,
+            }
+            console.log(updatedUser);
+            try {
+                await fetch(`https://server-fcs.onrender.com/api/users/updateGeneralUser/${_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedUser)
+                }).then(res =>
+                    res.json())
+                    .then(data => {
+                        if (data) {
+                            toast.success('আপনার তথ্য সফলভাবে আপডেট হয়েছে!');
+                            localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+                            setTimeout(() => {
+                                window.location.reload();
+                                // will store data in local storage
+                            }, 2000);
+                        }
+                    })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
-
+    console.log(nothingToChange)
 
 
     const uploadImage = async (e) => {
@@ -124,14 +133,14 @@ const UserDashboard = () => {
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="md:col-span-1">
                                 <div class="px-4 sm:px-0">
-                                    <h3 class="text-lg font-medium leading-6 text-gray-900">Profile</h3>
-                                    <p class="mt-1 mb-1 text-sm text-gray-600">This information will be displayed publicly so be careful what you share.</p>
+                                    <h3 class="text-lg font-medium leading-6 text-gray-900">প্রোফাইল</h3>
+                                    <p class="mt-1 mb-1 text-sm text-gray-600">আপনার দেওয়া তথ্যগুলো এখানে উপস্থাপিত।</p>
                                     {isVerified ? <div class="bg-blue-100 rounded-sm py-5 px-6 mb-4 text-base text-blue-600 mb-3" role="alert">
-                                        User is verified to the system. Can't change user information.
+                                        আপনার দেওয়া তথ্যগুলো যাচাইকৃত হয়েছে। আপনি এখন প্রোফাইল তথ্য পরিবর্তন করতে পারবেন না।
                                     </div> :
                                         <div>
                                             {filterVerification[0] ? <div class="bg-green-100 rounded-sm py-5 px-6 mb-4 text-base text-green-600 mb-3" role="alert">
-                                                Verification is pending. Please wait for the admin to verify you.
+                                                আপনার দেওয়া তথ্যগুলো একজন পরীক্ষক দ্বারা যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।
                                             </div> : <div class="bg-yellow-100 rounded-sm py-5 px-6 mb-4 text-base text-yellow-600 mb-3" role="alert">
                                                 User is not verified to the system. Can change user information.
                                                 To verify, please click on verify button.
@@ -141,7 +150,7 @@ const UserDashboard = () => {
                                             </div>
                                             }
                                         </div>}
-
+                                    <Toaster />
                                 </div>
                             </div>
                             <div class="mt-5 md:col-span-2 md:mt-0">
@@ -149,12 +158,11 @@ const UserDashboard = () => {
                                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                            <label for="about" class="block text-lg font-medium text-gray-700">About:</label>
+                                            <label for="about" class="block text-lg font-medium text-gray-700">ব্যবহারকারীর দেওয়া তথ্যসমূহঃ</label>
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label htmlFor="name" class="block  text-md font-medium text-gray-700">Name</label>
-                                                    {isVerified ? <div >
-
+                                                    <label htmlFor="name" class="block  text-md font-medium text-gray-700">নামঃ</label>
+                                                    {isVerified ? <div>
                                                         <div class="flex items">
                                                             <label htmlFor="name" class="mt-1 text-sm text-gray-700">{name} </label>
                                                             <div class="flex-shrink-0">
@@ -168,7 +176,7 @@ const UserDashboard = () => {
                                                 </div>
 
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">মোবাইল নাম্বারঃ</label>
                                                     {isVerified ? <label htmlFor="name" class="mt-1 text-sm text-gray-700">+880{phone}</label> : <input type="tel"
                                                         name="phone"
                                                         value={updatedPhone}
@@ -181,27 +189,27 @@ const UserDashboard = () => {
                                                 </div>
 
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
+                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">ইমেইলঃ</label>
                                                     {isVerified ? <label htmlFor="email" class="mt-1 text-sm text-gray-700">{email}</label> : <input type="text" placeholder={user.email} class="mt-1 cursor-not-allowed focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" disabled />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Gender</label>
+                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">লিঙ্গঃ</label>
                                                     {isVerified ? <label htmlFor="text" class="mt-1 text-sm text-gray-700">{gender}</label> : <input type="text"
                                                         value={updatedGender}
                                                         onChange={(e) => setUpdatedGender(e.target.value)} placeholder={gender}
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">Age</label>
+                                                    <label for="email-address" class="block text-sm font-medium text-gray-700">বয়সঃ</label>
                                                     {isVerified ? <label htmlFor="text" class="mt-1 text-sm text-gray-700">{age} years</label> : <input type="text"
                                                         value={updatedAge}
                                                         onChange={(e) => setUpdatedAge(e.target.value)}
-                                                        placeholder={age}
+                                                        placeholder={age + ' years'}
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
 
                                                 <div class="col-span-6">
-                                                    <label for="street-address" class="block text-sm font-medium text-gray-700">Street address</label>
+                                                    <label for="street-address" class="block text-sm font-medium text-gray-700">ঠিকানাঃ</label>
                                                     {isVerified ? <label htmlFor="address" class="mt-1 text-sm text-gray-700">{address}</label> : <input type="address"
                                                         value={updatedAddress}
                                                         onChange={(e) => setUpdatedAddress(e.target.value)}
@@ -211,15 +219,17 @@ const UserDashboard = () => {
                                             </div>
 
                                             <div>
-                                                <label class="block text-sm font-medium text-gray-700">Photo</label>
+                                                <label class="block text-sm font-medium text-gray-700">ছবিঃ</label>
                                                 <div class="mt-1 flex items-center">
                                                     {picture ? <img src={picture} alt="" className='h-48 w-48 rounded-sm' /> : <input type="file" className="file-input file-input-bordered w-full max-w-xs" />}
                                                 </div>
                                                 {
                                                     isVerified ? null : <div>
-                                                        <p class="mt-1 text-sm  text-gray-700" id="file_input_help">Edit current picture: </p>
+                                                        <p class="mt-1 text-sm  text-gray-700" id="file_input_help">বর্তমান ছবি পাল্টান: </p>
                                                         <input type="file" onChange={uploadImage} className="file-input file-input-bordered w-full max-w-xs" />
-                                                        {pictureUploadSuccess ? <p className="text-green-500">Image Uploaded Successfully</p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG </p>}
+                                                        {pictureUploadSuccess ? <p className="text-green-500">আপনার দেওয়া ছবিটি
+                                                            সার্ভারের যুক্ত হয়েছে।
+                                                        </p> : <p class="mt-1 text-sm  text-gray-700" id="file_input_help">PNG or JPG </p>}
                                                     </div>
                                                 }
                                             </div>
@@ -227,21 +237,10 @@ const UserDashboard = () => {
 
                                         </div>
                                         {isVerified ? null : <div>
-                                            {!updateSuccess ? <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                                <button type="submit" className="btn btn-outline btn-primary">Save the info</button>
-                                            </div> : <div className={`alert ${updateSuccess ? 'alert-info' : 'alert-warning'} shadow-sm`}>
-                                                <div>
-                                                    {
-                                                        updateSuccess ? <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                            <span>User information successfully updated. Please logout and login to show updated data </span>
-                                                        </div> : <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                                                            <span>Something went wrong. Please try again</span>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </div>}
+
+                                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                                <button type="submit" className="btn btn-outline btn-primary">তথ্য জমা দিন</button>
+                                            </div>
                                         </div>}
                                         {/* <button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save the info</button> */}
 
@@ -262,22 +261,24 @@ const UserDashboard = () => {
                         <div class="md:grid md:grid-cols-3 md:gap-6">
                             <div class="md:col-span-1">
                                 <div class="px-4 sm:px-0">
-                                    <h3 class="text-lg font-medium leading-6 text-gray-900">Consultation taken by user will appear here:</h3>
+                                    <h3 class="text-lg font-medium leading-6 text-gray-900">
+                                        আপনার নেওয়া সেবা সমূহের তালিকাঃ
+                                    </h3>
                                     <p class="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
                                 </div>
                             </div>
                             <div class="mt-5 md:col-span-2 md:mt-0">
 
-                                <div class="sm:rounded-md">
+                                <div class="overflow-x-auto">
 
-                                    <div className="overflow-x-auto">
+                                    <div className="m-2">
                                         <div>
                                             {
                                                 filterConsultation.length === 0 ? <div>
-                                                    <div className="alert shadow-lg">
+                                                    <div className="alert rounded-md">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                            <span>No Consultation Found!</span>
+                                                            <span>আপনি এখনো এখনো কোন পরামর্শ গ্রহণ করেননি!</span>
                                                         </div>
                                                     </div>
                                                 </div> : <div>
@@ -302,7 +303,7 @@ const UserDashboard = () => {
                                                                     <div className="grid grid-cols-2 gap-6">
                                                                         <div className='col-span-3 sm:col-span-2'>
                                                                             <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                                                                                Your Given Consultation Description:
+                                                                                আপনার দেওয়া সমস্যাটির বিবরণঃ
                                                                             </label>
                                                                             <div className="mt-1">
                                                                                 <div className="flex items-center mb-3">
@@ -312,7 +313,7 @@ const UserDashboard = () => {
                                                                         </div>
                                                                         <div className='col-span-3 sm:col-span-2'>
                                                                             <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                                                                                Consultation Status:
+                                                                                সমস্যার অবস্থাঃ
                                                                             </label>
 
                                                                             <div className="mt-1">
@@ -323,12 +324,16 @@ const UserDashboard = () => {
                                                                         </div>
                                                                         <div className='col-span-3 sm:col-span-2'>
                                                                             <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                                                                                Consultation Result:
+                                                                                একজন অভিজ্ঞ পরামর্শদাতার দেওয়া পরামর্শঃ
                                                                             </label>
 
                                                                             <div className="mt-1">
                                                                                 <div className="flex items-center mb-3">
-                                                                                    <span className="bg-green-100 text-green-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-green-200 white:text-green-900">{consultation.consultationDescriptionByAdmin}</span>
+
+                                                                                    {
+                                                                                        typeof consultation.consultationDescriptionByAdmin === 'string' && consultation.consultationDescriptionByAdmin.trim().length === 0 ? <span className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-blue-200 white:text-blue-900">
+                                                                                            এখনো উত্তর দেওয়া হয়নি! </span> : <span className="bg-green-100 text-green-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded white:bg-green-200 white:text-green-900"> {consultation.consultationDescriptionByAdmin} </span>
+                                                                                    }
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -421,7 +426,7 @@ const UserDashboard = () => {
                                             </fieldset>
                                         </div>
                                         <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                            <button type="submit" className="btn btn-outline btn-primary">Save</button>
+                                            <button type="submit" className="btn btn-outline btn-primary" disabled>Save</button>
                                         </div>
 
                                     </div>
