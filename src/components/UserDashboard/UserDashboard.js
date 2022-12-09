@@ -184,7 +184,7 @@ const UserDashboard = () => {
                                                         id="phone" placeholder={phone} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">Account Created:</label>
+                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">একাউন্ট নিবন্দনের সময়ঃ</label>
                                                     <label htmlFor="text" class="mt-1 text-sm text-gray-700">{dateFormat(created_at, "mmmm dS, yyyy")}</label>
                                                 </div>
 

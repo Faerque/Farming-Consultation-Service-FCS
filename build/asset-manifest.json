@@ -1,8 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.5aa2dc10.css",
-    "main.js": "/static/js/main.f93e2885.js",
+    "main.css": "/static/css/main.a0d1121d.css",
+    "main.js": "/static/js/main.f757a04f.js",
     "static/js/787.791c36b9.chunk.js": "/static/js/787.791c36b9.chunk.js",
+    "static/media/Aloo.jpg": "/static/media/Aloo.4f11e44723cf8777aca3.jpg",
+    "static/media/Roshun.jpg": "/static/media/Roshun.a07d2a8fe65d08edbc61.jpg",
+    "static/media/MishtiKumra.jpg": "/static/media/MishtiKumra.3f47312fa8d8fae677c7.jpg",
+    "static/media/Law.jpg": "/static/media/Law.4171bc412dbc3d830b8f.jpg",
+    "static/media/Fulkofi.jpg": "/static/media/Fulkofi.fcd6958583924143c46c.jpg",
+    "static/media/BadhaKofi.jpg": "/static/media/BadhaKofi.bf1d9a6b7119b21cbd65.jpg",
+    "static/media/KaloBegun1.jpg": "/static/media/KaloBegun1.9f4d7350cb9d0ca5b697.jpg",
+    "static/media/KaloBegun2.jpg": "/static/media/KaloBegun2.6a17074c1aded3d98fc6.jpg",
+    "static/media/Dedosh.jpg": "/static/media/Dedosh.39c16e7f92bbf0a6ccd7.jpg",
     "static/media/LeafBlast.jpg": "/static/media/LeafBlast.e89c2bd3d688e12d77a4.jpg",
     "static/media/RedRust.jpg": "/static/media/RedRust.53818a4a126c4bb588bf.jpg",
     "static/media/PataMoranuRog.jpg": "/static/media/PataMoranuRog.2d7d0dbbb97d25aac302.jpg",
@@ -10,12 +19,12 @@
     "static/media/UserAvatar.svg": "/static/media/UserAvatar.71f63c6c4dc141558a0d05856e3d9e07.svg",
     "static/media/right-arrow.svg": "/static/media/right-arrow.6f2bbcc3da6115694be6b5f495991bb0.svg",
     "index.html": "/index.html",
-    "main.5aa2dc10.css.map": "/static/css/main.5aa2dc10.css.map",
-    "main.f93e2885.js.map": "/static/js/main.f93e2885.js.map",
+    "main.a0d1121d.css.map": "/static/css/main.a0d1121d.css.map",
+    "main.f757a04f.js.map": "/static/js/main.f757a04f.js.map",
     "787.791c36b9.chunk.js.map": "/static/js/787.791c36b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5aa2dc10.css",
-    "static/js/main.f93e2885.js"
+    "static/css/main.a0d1121d.css",
+    "static/js/main.f757a04f.js"
   ]
 }

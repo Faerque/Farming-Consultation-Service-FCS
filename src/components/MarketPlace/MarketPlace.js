@@ -12,8 +12,18 @@ const MarketPlace = () => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     const { isVerified } = userInfo || {};
 
+    const filterSearch = (data) => {
+        if (searchResult === 'সবগুলো' || searchResult === ' ') {
+            return data;
+        } else if (data.name.includes(searchResult)) {
+            return data;
+        } else if (data.price.includes(searchResult)) {
+            return data;
+        } else if (data.location.includes(searchResult)) {
+            return data;
+        }
+    }
 
-    console.log(searchResult);
     return (
         <main >
             {!isVerified ? <div class="w-80 mx-auto rounded-md alert mt-8 alert-warning shadow-sm">
@@ -50,7 +60,8 @@ const MarketPlace = () => {
                         <p className="divider lg:divider-vertical"></p>
                         <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                             {
-                                data.map(data => <Product key={data.id} data={data} ></Product>)
+                                data.filter((data) => filterSearch(data))
+                                    .map(data => <Product key={data.id} data={data} ></Product>)
                             }
                         </div>
                     </div>
