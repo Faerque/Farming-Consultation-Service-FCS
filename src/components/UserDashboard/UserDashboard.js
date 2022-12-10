@@ -203,7 +203,7 @@ const UserDashboard = () => {
                                                     {isVerified ? <label htmlFor="text" class="mt-1 text-sm text-gray-700">{age} years</label> : <input type="text"
                                                         value={updatedAge}
                                                         onChange={(e) => setUpdatedAge(e.target.value)}
-                                                        placeholder={age === 0 ? 'বয়স লিখুন' : age}
+                                                        placeholder={age === 0 ? 'বয়স লিখুন' : age + ' years'}
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
 
