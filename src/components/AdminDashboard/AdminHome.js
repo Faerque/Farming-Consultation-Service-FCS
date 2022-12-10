@@ -15,7 +15,6 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
-            <FooterSm />
         </section>
     );
 };

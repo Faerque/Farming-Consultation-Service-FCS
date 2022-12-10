@@ -34,8 +34,8 @@ const MaintainService = () => {
                                 {loading ? <div className='p-48 ml-96'><SpinnerLoading /></div> : <div className='overflow-x-auto relative shadow-md sm:rounded-lg'>
                                     <div className='bg-white shadow sm:rounded-lg' >
                                         <div class="px-4 py-5 sm:px-6">
-                                            <h3 class="text-lg font-medium leading-6 text-gray-900">All Service available listed here</h3>
-                                            <p class="mt-1 max-w-2xl text-sm text-gray-500">Service Details</p>
+                                            <h3 class="text-lg font-medium leading-6 text-gray-900">All Consultation available listed here</h3>
+                                            <p class="mt-1 max-w-2xl text-sm text-gray-500">Consultation Details</p>
                                         </div>
                                         <div class="border-t border-gray-200">
                                             <div class="overflow-x-auto">
@@ -45,10 +45,6 @@ const MaintainService = () => {
                                                             <th>Index</th>
                                                             <th>Id</th>
                                                             <th>Name</th>
-                                                            <th>Description</th>
-                                                            <th>Email</th>
-                                                            <th>Verified</th>
-                                                            <th>Role</th>
 
                                                         </tr>
                                                     </thead>
@@ -58,10 +54,6 @@ const MaintainService = () => {
                                                             <td>{services._id}</td>
                                                             <td>{services.name}</td>
 
-                                                            <td>{services.description}</td>
-                                                            <td>No value</td>
-                                                            <td>No value</td>
-                                                            <td>No value</td>
                                                         </tr>)}
                                                     </tbody>
                                                 </table>
@@ -74,9 +66,7 @@ const MaintainService = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-20'>
-                <FooterSm />
-            </div>
+
         </section>
     );
 };

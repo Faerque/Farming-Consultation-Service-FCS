@@ -134,18 +134,17 @@ const UserDashboard = () => {
                             <div class="md:col-span-1">
                                 <div class="px-4 sm:px-0">
                                     <h3 class="text-lg font-medium leading-6 text-gray-900">প্রোফাইল</h3>
-                                    <p class="mt-1 mb-1 text-sm text-gray-600">আপনার দেওয়া তথ্যগুলো এখানে উপস্থাপিত।</p>
+                                    <p class="mt-1 mb-1 text-sm text-gray-600">গ্রাহকের দেওয়া তথ্যগুলো এখানে উপস্থাপিত।</p>
                                     {isVerified ? <div class="bg-blue-100 rounded-sm py-5 px-6 mb-4 text-base text-blue-600 mb-3" role="alert">
-                                        আপনার দেওয়া তথ্যগুলো যাচাইকৃত হয়েছে। আপনি এখন প্রোফাইল তথ্য পরিবর্তন করতে পারবেন না।
+                                        আপনার দেওয়া তথ্যগুলো যাচাইকৃত এবং আপনি কৃষি বিষয়ক পরামর্শ সেবার একজন নিবন্ধিত গ্রাহক। আপনি প্রোফাইল তথ্য পরিবর্তন করতে পারবেন না।
                                     </div> :
                                         <div>
                                             {filterVerification[0] ? <div class="bg-green-100 rounded-sm py-5 px-6 mb-4 text-base text-green-600 mb-3" role="alert">
                                                 আপনার দেওয়া তথ্যগুলো একজন পরীক্ষক দ্বারা যাচাই করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন।
                                             </div> : <div class="bg-yellow-100 rounded-sm py-5 px-6 mb-4 text-base text-yellow-600 mb-3" role="alert">
-                                                User is not verified to the system. Can change user information.
-                                                To verify, please click on verify button.
+                                                আপনি এখনো কৃষি বিষয়ক পরামর্শ সেবা তে নিবন্ধিত নন। তথ্য দিয়ে নিবন্ধিত হওয়ার জন্য অনুগ্রহ করে নিম্নোক্ত বাটনে ক্লিক করুন।
                                                 <div className='mt-2'>
-                                                    <Link to="/VerificationProcess" className="btn btn-outline btn-primary">verify now </Link>
+                                                    <Link to="/VerificationProcess" className="btn btn-outline btn-primary">নিবন্ধিত হউন</Link>
                                                 </div>
                                             </div>
                                             }
@@ -158,7 +157,7 @@ const UserDashboard = () => {
                                     <div class="shadow sm:overflow-hidden sm:rounded-md">
                                         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
 
-                                            <label for="about" class="block text-lg font-medium text-gray-700">ব্যবহারকারীর দেওয়া তথ্যসমূহঃ</label>
+                                            <label for="about" class="block text-lg font-medium text-gray-700">গ্রাহকের দেওয়া তথ্যসমূহঃ</label>
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-3 sm:col-span-2">
                                                     <label htmlFor="name" class="block  text-md font-medium text-gray-700">নামঃ</label>
@@ -181,10 +180,10 @@ const UserDashboard = () => {
                                                         name="phone"
                                                         value={updatedPhone}
                                                         onChange={(e) => setUpdatedPhone(e.target.value)}
-                                                        id="phone" placeholder={phone} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
+                                                        id="phone" placeholder={phone === " " ? 'মোবাইল নাম্বার লিখুন' : phone} class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
-                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">একাউন্ট নিবন্দনের সময়ঃ</label>
+                                                    <label htmlFor="last-name" class="block text-sm font-medium text-gray-700">একাউন্ট নিবন্ধনের সময়ঃ</label>
                                                     <label htmlFor="text" class="mt-1 text-sm text-gray-700">{dateFormat(created_at, "mmmm dS, yyyy")}</label>
                                                 </div>
 
@@ -196,7 +195,7 @@ const UserDashboard = () => {
                                                     <label for="email-address" class="block text-sm font-medium text-gray-700">লিঙ্গঃ</label>
                                                     {isVerified ? <label htmlFor="text" class="mt-1 text-sm text-gray-700">{gender}</label> : <input type="text"
                                                         value={updatedGender}
-                                                        onChange={(e) => setUpdatedGender(e.target.value)} placeholder={gender}
+                                                        onChange={(e) => setUpdatedGender(e.target.value)} placeholder={gender === " " ? 'পরিচয় দিন' : gender}
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
                                                 <div class="col-span-3 sm:col-span-2">
@@ -204,7 +203,7 @@ const UserDashboard = () => {
                                                     {isVerified ? <label htmlFor="text" class="mt-1 text-sm text-gray-700">{age} years</label> : <input type="text"
                                                         value={updatedAge}
                                                         onChange={(e) => setUpdatedAge(e.target.value)}
-                                                        placeholder={age + ' years'}
+                                                        placeholder={age === 0 ? 'বয়স লিখুন' : age}
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
 
@@ -213,7 +212,7 @@ const UserDashboard = () => {
                                                     {isVerified ? <label htmlFor="address" class="mt-1 text-sm text-gray-700">{address}</label> : <input type="address"
                                                         value={updatedAddress}
                                                         onChange={(e) => setUpdatedAddress(e.target.value)}
-                                                        placeholder={address}
+                                                        placeholder={address === " " ? 'ঠিকানা লিখুন' : address}
                                                         name="address" id="address" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />}
                                                 </div>
                                             </div>
@@ -264,7 +263,7 @@ const UserDashboard = () => {
                                     <h3 class="text-lg font-medium leading-6 text-gray-900">
                                         আপনার নেওয়া সেবা সমূহের তালিকাঃ
                                     </h3>
-                                    <p class="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+                                    <p class="mt-1 text-sm text-gray-600">কৃষি বিষয়ক পরামর্শ সেবা থেকে গ্রাহকের নেওয়া পরামর্শ সেবা গুলো এখানে উপস্থাপিত।</p>
                                 </div>
                             </div>
                             <div class="mt-5 md:col-span-2 md:mt-0">
@@ -278,7 +277,7 @@ const UserDashboard = () => {
                                                     <div className="alert rounded-md">
                                                         <div>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                            <span>আপনি এখনো এখনো কোন পরামর্শ গ্রহণ করেননি!</span>
+                                                            <span>আপনি এখনো কোনো পরামর্শ গ্রহণ করেননি!</span>
                                                         </div>
                                                     </div>
                                                 </div> : <div>
@@ -290,7 +289,7 @@ const UserDashboard = () => {
                                                                     <div>
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info flex-shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                                                         <span>{consultation.consultationName
-                                                                        } (Tap to see.)</span>
+                                                                        } (বিস্তারিত দেখুন)</span>
                                                                     </div>
 
                                                                 </div>

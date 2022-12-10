@@ -5,6 +5,7 @@ import dateFormat from "dateformat";
 import ReactImageMagnify from 'react-image-magnify';
 import Zoom from 'react-img-zoom'
 import PinchZoomPan from "react-responsive-pinch-zoom-pan";
+import { toast, Toaster } from 'react-hot-toast';
 const customStyles = {
     content: {
         top: '50%',
@@ -22,7 +23,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const ServiceRequestForm = ({ modalData, modalIsOpen, closeModal }) => {
-    const [ConsultationDes, setConsultationDes] = useState(" ");
+    const [ConsultationDes, setConsultationDes] = useState("");
     const { userName,
         userEmail,
         consultationDescription,
@@ -51,6 +52,9 @@ const ServiceRequestForm = ({ modalData, modalIsOpen, closeModal }) => {
             }).then(res => res.json())
                 .then(data => {
                     console.log(data);
+                    toast.success('Answered Successfully');
+                    closeModal();
+                    setConsultationDes("");
                 })
         } catch {
 
@@ -163,6 +167,7 @@ const ServiceRequestForm = ({ modalData, modalIsOpen, closeModal }) => {
                     </div>
                 </div>
             </Modal>
+            <Toaster />
         </div>
     );
 };

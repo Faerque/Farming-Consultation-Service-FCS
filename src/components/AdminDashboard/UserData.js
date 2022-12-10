@@ -114,9 +114,7 @@ const UserData = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-20'>
-                <FooterSm />
-            </div>
+
         </main>
     );
 };

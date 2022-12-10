@@ -44,7 +44,7 @@ const Services = () => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="-mx-4 flex flex-wrap">
+                                    <div className="-mx-4 p-4 flex flex-wrap">
                                         {
                                             loading === true ? <SpinnerLoading /> : serviceData.map(service => <Service key={service._id} service={service} />)
                                         }

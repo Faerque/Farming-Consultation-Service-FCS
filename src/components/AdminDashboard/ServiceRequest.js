@@ -155,9 +155,7 @@ const ServiceRequest = () => {
                     </div>
                 </div>
             </div>
-            <div className='mt-20'>
-                <FooterSm />
-            </div>
+
         </section>
     );
 };

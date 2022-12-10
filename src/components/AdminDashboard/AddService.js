@@ -32,6 +32,9 @@ const AddService = () => {
                 setLoading(false);
                 setSuccess(true);
                 setButtonDisabled(false);
+                // needs to clear the input field
+                setServiceName('');
+                setServiceDescription('');
             }, 2000);
 
         } catch (error) {
@@ -53,7 +56,7 @@ const AddService = () => {
             </div>
             <div className='flex-1 w-64'>
                 <div className='flex'>
-                    <div className='container mt-10'>
+                    <div className='container mt-4'>
                         <div class="flex items-center justify-center p-12">
 
                             <div class="mx-auto rounded-lg w-full max-w-[550px] bg-white">
@@ -66,7 +69,7 @@ const AddService = () => {
                                             for="email"
                                             class="mb-3 block text-base font-medium text-[#07074D]"
                                         >
-                                            Enter the service name
+                                            Enter the consultation name
                                         </label>
                                         <input
                                             type="name"
@@ -81,7 +84,7 @@ const AddService = () => {
                                         for="Service Description"
                                         class="mb-3 block text-base font-medium text-[#07074D]"
                                     >
-                                        Service Description
+                                        Consultation Description
                                     </label>
                                     <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Describe the service briefly"
                                         // {/* // needs this text area value */}
@@ -118,7 +121,7 @@ const AddService = () => {
                                         {success && <div class="alert alert-success shadow-lg">
                                             <div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                                <span>Service has been published for User</span>
+                                                <span>Consultation has been published for User</span>
                                             </div>
                                         </div>}
                                         {error && <div class="alert alert-error shadow-lg">
