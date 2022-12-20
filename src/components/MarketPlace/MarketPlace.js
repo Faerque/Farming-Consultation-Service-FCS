@@ -29,7 +29,7 @@ const MarketPlace = () => {
             {!isVerified ? <div class="w-80 mx-auto rounded-md alert mt-8 alert-warning shadow-sm">
                 <div className='flex item-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-                    <span >Please Verify yourself to access buy and sell. </span><Link to="/VerificationProcess">Verify Now <img className='stroke-current flex-shrink-0 h-5 w-6' alt="Arrow" src={RightArrow} /></Link>
+                    <span className='text-sm'>দুঃখিত! আপনি এখনো কৃষি বিষয়ক পরামর্শ সেবার একজন প্রতিপন্ন গ্রাহক নন!</span><Link to="/VerificationProcess" className='text-sm'>প্রতিপন্ন গ্রাহক হউন<img className='stroke-current flex-shrink-0 h-5 w-6' alt="Arrow" src={RightArrow} /></Link>
                 </div>
             </div> : null
             }
@@ -49,7 +49,7 @@ const MarketPlace = () => {
                                 <input
                                     type="search"
                                     class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-                                                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                                border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
                                     onChange={e => setSearchResult(e.target.value)}
                                     placeholder="নাম, মূল্য বা অবস্থান দ্বারা অনুসন্ধান করুন"
                                 />

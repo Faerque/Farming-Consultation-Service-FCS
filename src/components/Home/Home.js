@@ -4,7 +4,7 @@ import FooterSm from '../Footer/FooterSm';
 
 import Feature from './Feature';
 import Header from './Header';
-import Testimonials from './Testimonials';
+
 import TopFeature from './TopFeature';
 
 const Home = () => {
@@ -14,7 +14,6 @@ const Home = () => {
                 <Header />
                 <TopFeature />
                 <Feature />
-                <Testimonials />
                 <FooterMain />
                 <FooterSm />
             </div>

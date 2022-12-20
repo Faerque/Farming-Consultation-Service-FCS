@@ -5,9 +5,9 @@ import consulationSvg from '../../assets/consultations.svg';
 const Service = ({ service }) => {
     const navigate = useNavigate();
     console.log(service);
-    const { _id, name, description, available, picture } = service;
+    const { _id, name } = service;
     const handleNext = (_id) => {
-        console.log(_id);
+
         navigate({ pathname: "/takeConsultation", search: `?id=${_id}` });
     }
 

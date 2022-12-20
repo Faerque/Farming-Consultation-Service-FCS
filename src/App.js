@@ -1,5 +1,3 @@
-
-import { createContext, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminDashboard from "./components/AdminDashboard/AdminDashboard";
 import EmergencyContactForm from "./components/EmergencyContactForm";
@@ -27,44 +25,39 @@ import RedRustRog from "./components/Articles/RedRustRog";
 import PataMoranuRog from "./components/Articles/PataMoranuRog";
 import BlastRog from "./components/Articles/BlastRog";
 
-export const UserContext = createContext();
-
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
-  console.log(loggedInUser);
+
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]} >
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<UserLogin />} />
-          <Route path="/signup" element={<UserSignup />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/marketplace" element={<MarketPlace />} />
-          <Route path="/emergencyForm" element={<EmergencyContactForm />} />
-          <Route path="/mobileDetected" element={<MobileAdminWarning />} />
-          <Route path="/informationAndLatestNews" element={<Articles />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-          <Route path="/redRustRog" element={<RedRustRog />} />
-          <Route path="/pataMoranuRog" element={<PataMoranuRog />} />
-          <Route path="/blastRog" element={<BlastRog />} />
-          <Route path="/*" element={<PrivateChecking />}>
-            <Route path="dashboard" element={<UserDashboard />} />
-            <Route path="F7d32fab841334cdb7b6" element={<AdminDashboard />} />
-            <Route path="userData" element={<UserData />} />
-            <Route path="serviceRequest" element={<ServiceRequest />} />
-            <Route path="addService" element={<AddService />} />
-            <Route path="maintainService" element={<MaintainService />} />
-            <Route path="takeConsultation" element={<TakeConsultation />} />
-            <Route path="VerificationProcess" element={<VerificationProcess />} />
-            <Route path="userVerificationRequest" element={<VerificationRequest />} />
-            <Route path="checkingForVerifiedUser" element={<CheckingForVerifiedUser />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </UserContext.Provider>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/signup" element={<UserSignup />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/marketplace" element={<MarketPlace />} />
+        <Route path="/emergencyForm" element={<EmergencyContactForm />} />
+        <Route path="/mobileDetected" element={<MobileAdminWarning />} />
+        <Route path="/informationAndLatestNews" element={<Articles />} />
+        <Route path="/faq" element={<Faq />} />
+        <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/redRustRog" element={<RedRustRog />} />
+        <Route path="/pataMoranuRog" element={<PataMoranuRog />} />
+        <Route path="/blastRog" element={<BlastRog />} />
+        <Route path="/*" element={<PrivateChecking />}>
+          <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="F7d32fab841334cdb7b6" element={<AdminDashboard />} />
+          <Route path="userData" element={<UserData />} />
+          <Route path="serviceRequest" element={<ServiceRequest />} />
+          <Route path="addService" element={<AddService />} />
+          <Route path="maintainService" element={<MaintainService />} />
+          <Route path="takeConsultation" element={<TakeConsultation />} />
+          <Route path="VerificationProcess" element={<VerificationProcess />} />
+          <Route path="userVerificationRequest" element={<VerificationRequest />} />
+          <Route path="checkingForVerifiedUser" element={<CheckingForVerifiedUser />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

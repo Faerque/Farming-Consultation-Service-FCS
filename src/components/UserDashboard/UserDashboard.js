@@ -107,8 +107,6 @@ const UserDashboard = () => {
         }
     }
     console.log(nothingToChange)
-
-
     const uploadImage = async (e) => {
         console.log(e.target.files[0]);
         const files = e.target.files;
@@ -241,9 +239,6 @@ const UserDashboard = () => {
                                                 <button type="submit" className="btn btn-outline btn-primary">তথ্য জমা দিন</button>
                                             </div>
                                         </div>}
-                                        {/* <button type="submit" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save the info</button> */}
-
-
                                     </div>
                                 </form>
                             </div>
@@ -294,11 +289,6 @@ const UserDashboard = () => {
 
                                                                 </div>
                                                                 <div className="collapse-content">
-                                                                    {/* Your Given Consultation Description: {consultation.consultationDescription}
-                                                                    <br />
-                                                                    Consultation Status: {consultation.consultationStatus}
-                                                                    <br />
-                                                                    Consultation Result: {consultation.consultationDescriptionByAdmin} */}
                                                                     <div className="grid grid-cols-2 gap-6">
                                                                         <div className='col-span-3 sm:col-span-2'>
                                                                             <label htmlFor="about" className="block text-md font-medium text-gray-700">

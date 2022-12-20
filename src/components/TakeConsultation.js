@@ -117,7 +117,7 @@ const TakeConsultation = () => {
                                             consultationById.description
                                         }
                                     </p>
-                                    <div class="flex flex-wrap">
+                                    <div class="flex w-4/5 flex-wrap">
                                         <div class="grow-0 shrink-0 basis-auto w-full  ">
                                             <div class="flex mb-2 items-start">
                                                 <div tabIndex={0} className="collapse rounded-md  collapse-arrow border border-base-300 bg-base-100 rounded-box">
@@ -135,7 +135,7 @@ const TakeConsultation = () => {
                                                         আমার নেওয়া সেবাটির উত্তর কোথায় দেখতে পাব?
                                                     </div>
                                                     <div className="collapse-content">
-                                                        <p>গাহকের ড্যাশবোর্ডে দেখতে পাওয়া যাবে।</p>
+                                                        <p>গ্রাহকের ড্যাশবোর্ডে দেখতে পাওয়া যাবে।</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,7 +159,7 @@ const TakeConsultation = () => {
                                         <label class="mb-0 block text-base
 font-normal
 text-gray-700">
-                                            আপনার বর্ণিত সমস্যার সম্পর্কিত একটি স্পষ্ট ছবি দিনঃ
+                                            আপনার বর্ণিত সমস্যা সম্পর্কিত একটি স্পষ্ট ছবি দিনঃ
                                         </label>
 
                                         <div class="mb-2">

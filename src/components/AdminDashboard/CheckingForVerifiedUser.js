@@ -137,21 +137,18 @@ const CheckingForVerifiedUser = () => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                         <div className='flex flex-row ml-96'>
                             <div className='flex flex-col p-2 '>
                                 <a href="#my-modal-2" class="btn" className="btn rounded-md btn-primary" >Verify User</a>
                             </div>
-
                         </div>
                         <div class="modal" id="my-modal-2">
                             <div class="modal-box rounded-md">
                                 {!success ? <div>
 
                                     <h3 class="font-bold text-lg">Are you sure want to verify the user?</h3>
-                                    <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+                                    <p class="py-4">Please check the user Information again!</p>
                                     <div class="modal-action">
                                         <a onClick={handleVerifyUser} class="btn">Yes</a>
                                         <a href='#' class="btn">Not Now</a>

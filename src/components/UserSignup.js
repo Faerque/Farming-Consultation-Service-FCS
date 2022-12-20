@@ -76,41 +76,40 @@ const UserSignup = () => {
                 <div className="w-full max-w-md space-y-8">
                     <div>
                         <img className="mx-auto h-20 w-auto" src={Logo} alt="FCS" />
-                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">Have an account ?</h2>
+                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">একাউন্ট আছে?</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            <Link to="/login" className="font-medium text-2xl text-primary-focus hover:text-primary">Sign in now</Link>
+                            <Link to="/login" className="font-medium text-2xl text-primary-focus hover:text-primary">লগইন করুন</Link>
                         </p>
                     </div>
                     <form className="mt-8 space-y-6" onSubmit={submitHandler}>
-                        <input type="hidden" name="remember" value="true" />
 
                         <div className="-space-y-px rounded-md shadow-sm">
                             <div>
-                                <label for="name" className="sr-only">Name</label>
-                                <input id="name" name="name" type="name" autocomplete="name" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Name "
+
+                                <input id="name" name="name" type="name" autocomplete="name" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="আপনার নাম লিখুন"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
 
                                 />
                             </div>
                             <div>
-                                <label for="email-address" className="sr-only">Email address</label>
-                                <input id="email-address" name="email" type="email" autocomplete="email" required className="relative block w-full border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"
+
+                                <input id="email-address" name="email" type="email" autocomplete="email" required className="relative block w-full border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="আপনার ব্যক্তিগত ইমেইল লিখুন"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label for="password" className="sr-only">Password</label>
-                                <input onKeyUp={handleCapsLock} id="password" name="password" type="password" required className="relative block w-full appearance-none rounded-none rounded- border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Create an unique password"
+
+                                <input onKeyUp={handleCapsLock} id="password" name="password" type="password" required className="relative block w-full appearance-none rounded-none rounded- border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="একটি শক্তিশালী পাসওয়ার্ড তৈরি করুন"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 {isCapsLockIsOn === true ? <small className="text-sx text-red-500">Caps lock is on</small> : null}
                             </div>
                             <div>
-                                <label for="Confirm_Password" className="sr-only">Confirm Password</label>
-                                <input onKeyUp={handleCapsLock} id="Enter_password" name="password" type="password" required className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Enter your password again"
+
+                                <input onKeyUp={handleCapsLock} id="Enter_password" name="password" type="password" required className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="পাসওয়ার্ডটি আবার লিখুন"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
@@ -127,14 +126,17 @@ const UserSignup = () => {
                         </div>}
                         {SignUpSuccess === true && <div class="alert alert-success shadow-lg"> <div>
                             <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            <span>User Created Successfully</span>
+                            <span>গ্রাহকের একাউন্ট তৈরি সম্পন্ন হয়েছে!</span>
                         </div>
                         </div>
                         }
+                        <div>
+                            {message}
+                        </div>
                         <div className='place-content-center' >
                             <button type="submit" className="flex w-full justify-center btn btn-outline btn-success">
 
-                                Sign Up
+                                সাইন আপ
                             </button>
                         </div>
                     </form>

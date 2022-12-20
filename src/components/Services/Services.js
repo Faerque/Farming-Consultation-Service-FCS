@@ -27,7 +27,7 @@ const Services = () => {
         }
         fetchData();
     }, []);
-    <SpinnerLoading />
+
     return (
         <div>
             <div className="pt-8 pb-2 lg:pt-[60px] lg:pb-[90px]">

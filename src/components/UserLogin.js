@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ForgetPassword from './ForgetPassword';
-import UserAvatar from '../assets/UserAvatar.svg'
-import FooterSm from './Footer/FooterSm';
 import axios from 'axios';
 import Loading from './Loading';
 import Logo from '../assets/Logo.png';
@@ -43,18 +41,13 @@ const UserLogin = () => {
                 }
             }
             setLoading(true);
-            const { data } = await axios.post('https://server-fcs.onrender.com/api/users/login', { email, password }, {
-                email,
-                password
-            }, config);
+            const { data } = await axios.post('https://server-fcs.onrender.com/api/users/login', { email, password }, config);
             const signInUser = {
                 isSignedIn: true,
                 ...data
             }
-            const userVerified = data.isVerified;
             // here we set it into local storage in object format because we can't set it in string format in local storage
             localStorage.setItem('userInfo', JSON.stringify(signInUser));
-            localStorage.setItem('userVerified', JSON.stringify(userVerified));
 
             setLoading(false);
             // giving a delay of 1 second to show the loading screen
@@ -73,30 +66,27 @@ const UserLogin = () => {
     }
 
     return (
-        <section  >
+        <section>
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
                         <img className="mx-auto h-20 w-auto" src={Logo} alt="FCS" />
-                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">Sign in to your account</h2>
+                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-neutral">আপনার অ্যাকাউন্টে লগ ইন করুন</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            Or <br />
-                            <Link to="/signup" className="font-medium text-2xl text-primary-focus hover:text-primary">Create an account</Link>
+                            অথবা <br />
+                            <Link to="/signup" className="font-medium text-2xl text-primary-focus hover:text-primary">একটি একাউন্ট তৈরি করুন</Link>
                         </p>
                     </div>
                     <form className="mt-8 space-y-6" onSubmit={submitHandler} >
-                        <input type="hidden" name="remember" value="true" />
                         <div className="-space-y-px rounded-md shadow-sm">
                             <div>
-                                <label for="email-address" className="sr-only">Email address</label>
-                                <input id="email-address" name="email" type="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Email address"
+                                <input id="email-address" name="email" type="email" required className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="ইমেইল"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label for="password" className="sr-only">Password</label>
-                                <input onKeyUp={handleCapsLock} id="password" name="password" type="password" autocomplete="current-password" required className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" placeholder="Password"
+                                <input onKeyUp={handleCapsLock} id="password" name="password" type="password" autocomplete="current-password" required className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-green-500 focus:outline-none focus:ring-green-500 sm:text-sm" placeholder="পাসওয়ার্ড"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -120,20 +110,19 @@ const UserLogin = () => {
                         {loginSuccess === true && <div class="alert rounded-md alert-success shadow-md">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                <span>Successfully login</span>
+                                <span>লগইন সম্পন্ন হয়েছে!</span>
                             </div>
                         </div>}
                         <div className='place-content-center'>
                             <button type="submit" className="flex w-full justify-center btn btn-outline btn-success">
-                                Sign in
+                                লগইন করুন
                             </button>
                         </div>
                     </form>
-                    <button className="font-medium text-primary-focus hover:text-red-500" onClick={handleModalShow} >Forgot your password?</button>
+                    <button className="font-medium text-primary-focus hover:text-red-500" onClick={handleModalShow} >পাসওয়ার্ড ভুলে গেছেন?</button>
                     {showModal && <ForgetPassword setShowModal={setShowModal} />}
                 </div>
             </div>
-
         </section>
     );
 };

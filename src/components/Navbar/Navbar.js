@@ -1,49 +1,41 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import logo from '../../assets/Logo.png'
 
-
-
 const Navbar = () => {
-    const navigate = useNavigate();
+
     // getting user info from local storage
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
-
 
     // logout function
     const logoutHandler = () => {
         localStorage.removeItem('userInfo');
         window.location.reload();
-        navigate('/');
 
     }
 
-
-    console.log(userInfo);
     return (
         <div>
             {!isMobile ? <div>
                 <nav class="bg-neutral">
                     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-                        <a href="https://flowbite.com" class="flex items-center">
-                            <img src={logo} class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" />
+                        <a href="/" class="flex items-center">
+                            <img src={logo} class="h-6 mr-3 sm:h-9" alt="Farm logo" />
                             <label class="self-center text-xl font-semibold whitespace-nowrap text-white"> কৃষি বিষয়ক পরামর্শ সেবা </label>
                         </a>
                         <div>
                         </div>
                         <div class="flex items-center">
-                            <a href="tel:5541251234" class="mr-6 text-lg font-medium text-gray-500 text-white hover:underline">(555) 412-1234</a>
+                            <a href="tel:5541251234" class="mr-6 text-md font-medium text-gray-500 text-white hover:underline">দ্রুত সেবা পেতে এখানে ক্লিক করুন </a>
                             {!userInfo ? <div>
 
-                                <Link to="/login" class="text-xl font-medium text-blue-600  hover:underline">লগইন</Link>
+                                <Link to="/login" class="text-xl font-medium text-blue-600  hover:underline">লগ ইন</Link>
                             </div> :
                                 <div class="dropdown dropdown-end">
                                     <label tabIndex="0" class="btn btn-ghost btn-circle avatar">
                                         <div class="w-10 rounded-full">
-                                            {userInfo.picture ? <img alt='userImage' src={userInfo.picture} /> : null}
+                                            <img alt='userImage' src={userInfo.picture} />
                                         </div>
                                     </label>
                                     {userInfo ? <div>
@@ -58,7 +50,7 @@ const Navbar = () => {
                                                     Got to Admin Dashboard
                                                 </Link> : null}
                                             </li>
-                                            <li><button onClick={logoutHandler} >লগআউট</button></li>
+                                            <li><button onClick={logoutHandler} >লগ আউট</button></li>
                                         </ul>
                                     </div> : " "}
                                 </div>}
@@ -99,7 +91,7 @@ const Navbar = () => {
                                 <img src={logo} class="h-6 mr-3 sm:h-9" alt="FCS Logo" />
                             </p>
                             <div class="flex items-center">
-                                <a href="tel:5541251234" class="mr-6 text-sm font-medium text-white hover:underline">(555) 412-1234</a>
+                                <a href="tel:5541251234" class="mr-6 text-sm font-medium text-white hover:underline">দ্রুত সেবা পেতে এখানে ক্লিক করুন</a>
                                 {!userInfo ? <div>
 
                                     <Link to="/login" class="text-sm font-medium text-blue-600  hover:underline">লগইন</Link>

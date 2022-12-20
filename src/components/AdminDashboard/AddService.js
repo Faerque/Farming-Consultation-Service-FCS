@@ -74,7 +74,7 @@ const AddService = () => {
                                         <input
                                             type="name"
 
-                                            placeholder="Service Name"
+                                            placeholder="Consultation Name"
                                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                             value={serviceName}
                                             onChange={(e) => setServiceName(e.target.value)}
@@ -92,11 +92,9 @@ const AddService = () => {
                                         onChange={(e) => setServiceDescription(e.target.value)}
                                     ></textarea>
                                     <div class="mb-4 pt-4">
-                                        <label class="mb-2 block text-xl font-semibold text-[#07074D]">
-                                            Upload File
-                                        </label>
 
-                                        <div class="mb-6">
+
+                                        {/* <div class="mb-6">
                                             <input type="file" name="file" id="file" class="sr-only" />
                                             <label
                                                 for="file"
@@ -116,7 +114,7 @@ const AddService = () => {
                                                     </span>
                                                 </div>
                                             </label>
-                                        </div>
+                                        </div> */}
                                         {loading && <Loading />}
                                         {success && <div class="alert alert-success shadow-lg">
                                             <div>
@@ -135,7 +133,7 @@ const AddService = () => {
                                         <button disabled={buttonDisabled} type="submit" className="flex w-full justify-center btn btn-outline btn-success">
                                             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                             </span>
-                                            Add Service
+                                            Release the Consultation
                                         </button>
                                     </div>
                                     <div>

@@ -4,11 +4,8 @@ const TopFeature = () => {
     return (
         <div>
             <div class="container my-24 px-6 mx-auto">
-
-
                 <section class="mb-32 text-gray-800 text-center">
-                    <h2 class="text-3xl font-bold mb-20">Why is it so great?</h2>
-
+                    <h2 class="text-3xl font-bold mb-20">কেন কৃষি বিষয়ক পরামর্শ সেবা?</h2>
                     <div class="grid lg:gap-x-12 lg:grid-cols-3">
                         <div class="mb-12 lg:mb-0">
                             <div class="rounded-lg shadow-lg h-full block bg-white">

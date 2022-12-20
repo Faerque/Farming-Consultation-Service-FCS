@@ -7,6 +7,7 @@ import fulkofi from "./ImageData/Fulkofi.jpg";
 import badhaKofi from "./ImageData/BadhaKofi.jpg";
 import mishtikumra from "./ImageData/MishtiKumra.jpg";
 import roshun from './ImageData/Roshun.jpg';
+
 const data = [
     {
         "id": 1,
@@ -99,9 +100,5 @@ const data = [
         "price": "প্রতিটি ৮০ টাকা",
         "location": "ফরিদপুর",
     }
-
-
-
-
 ]
 export default data;
